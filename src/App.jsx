@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-
+import { Footer } from './Components/Footer/Footer'
+  const integrantes = ["Joaquin Ignacio Castillo", "Lian Ivan Sinchez", "Lucas San Segundo"];
 function App() {
   const [count, setCount] = useState(0)
 
@@ -115,6 +116,7 @@ function App() {
 
       <div className="ticks"></div>
       <section id="spacer"></section>
+      <Footer integrantes={integrantes}></Footer>
     </>
   )
 }
