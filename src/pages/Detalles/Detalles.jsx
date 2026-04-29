@@ -3,6 +3,9 @@ import { Footer } from "../../Components/Footer/Footer";
 import { useParams } from "react-router";
 import { getProducts } from "../../services/api";
 import DetallesCard from "../../Components/DetallesCard/DetallesCard";
+import { useNavigate } from "react-router";
+import { Header } from "../../Components/Header/Header";
+import { useTranslation } from "react-i18next";
 
 const Detalles = () => {
   const { id } = useParams();
@@ -31,9 +34,6 @@ const Detalles = () => {
           <DetallesCard item={itemInfo} />
         )}
       </main>
-      <Footer />
     </div>
-  );
-};
-
-export default Detalles;
+  )
+}

@@ -1,0 +1,30 @@
+{
+
+    "home": {
+
+        "title": "Juegos"
+    },
+    "Detalles": {
+
+        "title" : "Acerca de nosotros",
+        "title2": "🎉 ¡Bienvenidos a IUPI! 🎉" ,
+        "question" : "🧠 ¿Qué es IUPI?",
+        "answer" : "IUPI no es solo un microemprendimiento… ¡es una fábrica de ideas divertidas! 🎨 Nacimos para acompañar a padres, docentes y profesionales en el mágico desafío de enseñar...",
+        "question2" : "🧩 ¿Qué materiales usamos?",
+        "answer2" : "En IUPI tenemos un universo de materiales tan variado como divertido...",
+        "question3" : "🎨 ¿Querés tu propio juego?",  
+        "answer3" : "¡Obvio que sí! En IUPI nos encanta crear cosas únicas..."
+
+        
+    },
+    "header" :{
+
+        "inicio" : "Inicio",
+        "detalles" : "Detalles"
+    },
+    "footer" : {
+
+        "integers" : "Integrantes"
+    }
+
+}
