@@ -1,11 +1,23 @@
 {
+  "home": {
+    "title": "Games"
+  },
+  "Detalles": {
+    "title": "About us",
+    "title2": "🎉 Welcome to IUPI! 🎉",
+    "question": "🧠 What is IUPI?",
+    "answer": "IUPI is not just a small business… it’s a factory of fun ideas! 🎨 We were born to support parents, teachers, and professionals in the magical challenge of teaching...",
+    "question2": "🧩 What materials do we use?",
+    "answer2": "At IUPI we have a universe of materials as varied as they are fun...",
+    "question3": "🎨 Do you want your own game?",
+    "answer3": "Of course! At IUPI we love creating unique things..."
+  },
+  "header": {
+    "inicio": "Home",
+    "detalles": "Details"
+  },
+  "footer" : {
 
-    "home": {
-
-        "title": "Titulo en inglissshhh"
-    },
-    "Detalles": {
-
-        "title" : "Aca iria el otro titulo"
+        "integers" : "Members"
     }
 }
