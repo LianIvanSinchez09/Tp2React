@@ -12,7 +12,7 @@ import Detalles from './pages/Detalles/Detalles.jsx'
       element: <Home />
     },
     {
-      path : "/Detalles",
+      path : "/detalles/:id",
       element : <Detalles />
     }
   ])
