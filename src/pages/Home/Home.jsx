@@ -1,6 +1,7 @@
 import React from 'react'
 import { Footer } from '../../Components/Footer/Footer'
-import { useTranslation } from "react-i18next"
+import ItemLoader from '../../Components/ItemLoader/ItemLoader'
+import '../../App.css'
 
 const Home = () => {
   const { t } = useTranslation();
@@ -9,8 +10,11 @@ const Home = () => {
       <main className="grow">
         <h1>{t("home.title")}</h1>
       </main>
+      <ItemLoader/>  
       <Footer />
     </div>
+  
+  </>
   )
 }
 
