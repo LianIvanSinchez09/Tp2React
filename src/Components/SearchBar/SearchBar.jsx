@@ -14,18 +14,18 @@ const SearchBar = ({
     };
 
     return (
-        <div className="p-2 m-2 flex flex-col items-center justify-center">
+        <div className="p-4 w-full flex flex-col items-center justify-center">
             <input
-                className="bg-white dark:bg-[#1f2028] text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-[#2e303a] px-4 py-2.5 rounded-lg font-sans text-[0.95rem] outline-none transition-all duration-200 cursor-text focus:border-purple-500 focus:ring-1 focus:ring-purple-500 w-full max-w-md shadow-sm"
-                placeholder="Buscá tu artículo"
+                className="w-full max-w-lg px-6 py-3 text-lg text-purple-900 bg-white border-4 border-purple-300 rounded-full shadow-lg outline-none transition-all duration-300 placeholder-purple-400 focus:border-pink-400 focus:ring-4 focus:ring-pink-200 hover:shadow-xl hover:-translate-y-1"
+                placeholder="Buscá tu artículo..."
                 type="text"
                 value={searchQuery}
                 onChange={handleInputChange}
             />
 
             {noResults && (
-                <p className="text-red-500 text-sm mt-0 font-medium">
-                    No se encontraron resultados para <strong className="font-bold">"{searchQuery}"</strong>
+                <p className="mt-4 px-4 py-1.5 bg-white border-2 border-red-400 text-red-500 rounded-full text-sm font-bold shadow-sm animate-pulse">
+                    No se encontraron resultados para "{searchQuery}"
                 </p>
             )}
         </div>
