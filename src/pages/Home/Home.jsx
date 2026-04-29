@@ -1,8 +1,7 @@
 import React from 'react'
 import { Footer } from '../../Components/Footer/Footer'
 import ItemLoader from '../../Components/ItemLoader/ItemLoader'
-import useTranslation from "i18next";
-import '../../App.css'
+import {useTranslation} from "react-i18next";
 
 const Home = () => {
   const { t } = useTranslation();
