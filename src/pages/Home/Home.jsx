@@ -1,6 +1,7 @@
 import React from 'react'
 import { Footer } from '../../Components/Footer/Footer'
 import ItemLoader from '../../Components/ItemLoader/ItemLoader'
+import useTranslation from "i18next";
 import '../../App.css'
 
 const Home = () => {
@@ -14,7 +15,6 @@ const Home = () => {
       <Footer />
     </div>
   
-  </>
   )
 }
 
