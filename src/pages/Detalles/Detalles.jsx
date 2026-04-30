@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { Header } from "../../Components/Header/Header";
 import { useTranslation } from "react-i18next";
 
-const Detalles = () => {
+export const Detalles = () => {
   const { id } = useParams();
 
   const [itemInfo, setItemInfo] = useState(null);

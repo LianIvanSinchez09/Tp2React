@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 
 const DetallesCard = ({ item }) => {
 
@@ -9,7 +10,7 @@ const DetallesCard = ({ item }) => {
         
     return (
     <div className="flex flex-col min-h-screen">
-      <Header navigation={navigation}></Header>
+      <Header navigation={navigation}/>
       <main className="grow">
         <h1 className="text-center text-white text-5xl font-bold animate-bounce">{t("Detalles.title")}</h1>
 

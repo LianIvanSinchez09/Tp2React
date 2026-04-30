@@ -6,7 +6,7 @@ export const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <header className=" sticky top-0 z-50 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">
+    <header className=" sticky top-0 z-50 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
         {/* Logo */}
