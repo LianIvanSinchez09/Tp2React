@@ -7,6 +7,10 @@ const ItemLoader = ({ searchQuery }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
+  console.log(products);
+  
+
   useEffect(() => {
     setLoading(true); 
     setError(null);

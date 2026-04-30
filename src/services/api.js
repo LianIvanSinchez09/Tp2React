@@ -21,3 +21,20 @@ export async function getProducts(searchQuery = "") {
 
   return response.json();
 }
+
+export async function getDetails(id) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Error de HTTP: ${response.status}`);
+  }
+
+  const data = await response.json(); 
+
+  if (id) {
+    return data.filter((item) => item.id === id); 
+  }
+
+  return data;
+}
+

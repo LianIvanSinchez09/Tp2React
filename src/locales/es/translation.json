@@ -4,7 +4,7 @@
 
         "title": "Juegos"
     },
-    "Detalles": {
+    "SobreNosotros": {
 
         "title" : "Acerca de nosotros",
         "title2": "🎉 ¡Bienvenidos a IUPI! 🎉" ,
@@ -20,7 +20,7 @@
     "header" :{
 
         "inicio" : "Inicio",
-        "detalles" : "Detalles"
+        "SobreNosotros" : "Sobre Nosotros"
     },
     "footer" : {
 
