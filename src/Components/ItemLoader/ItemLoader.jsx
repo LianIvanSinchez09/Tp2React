@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { getProducts } from '../../services/api.js';
 import ItemCard from '../ItemCard/ItemCard.jsx';
 
@@ -8,31 +8,30 @@ const ItemLoader = ({ searchQuery }) => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const cantProductos=6;
+  const cantProductos = 6;
 
-  // effect de resetear la paginación cuando el usuario hace una nueva búsqueda
+  // Referencia al div que estará al final de la lista
+  const loaderRef = useRef(null);
+
+  // Effect para resetear la paginación cuando el usuario hace una nueva búsqueda
   useEffect(() => {
     setPage(1);
     setProducts([]);
     setHasMore(true);
   }, [searchQuery]);
 
-  // effect de buscar productos cuando cambia la query o la página
+  // Effect para buscar productos cuando cambia la query o la página
   useEffect(() => {
     setLoading(true);
     setError(null);
-
     getProducts(searchQuery, page, cantProductos)
       .then(data => {
         if (Array.isArray(data)) {
-          // Si es la primera página, reemplazamos. Si no acumulamos al array existente.
           if (page === 1) {
             setProducts(data);
           } else {
             setProducts(prevProducts => [...prevProducts, ...data]);
           }
-
-          // Si MockAPI nos devuelve menos de cant productos, llegamos al final
           if (data.length < cantProductos) {
             setHasMore(false);
           }
@@ -48,15 +47,36 @@ const ItemLoader = ({ searchQuery }) => {
       });
   }, [searchQuery, page]);
 
-  // Función para avanzar a la siguiente página
-  const handleLoadMore = () => {
-    setPage(prevPage => prevPage + 1);
-  };
+  // Effect para el intersection observer (scroll infinito)
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const target = entries[0];
+      // Si el div es visible, hay más elementos, y no está cargando actualmente: sumamos una página
+      if (target.isIntersecting && hasMore && !loading) {
+        setPage(prevPage => prevPage + 1);
+      }
+    }, {
+      // rootMargin hace que detecte el div 100px antes de llegar
+      rootMargin: "100px" 
+    });
+
+    const currentLoader = loaderRef.current;
+    if (currentLoader) {
+      observer.observe(currentLoader);
+    }
+
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
+      }
+    };
+  }, [hasMore, loading]);
 
   // Solo mostramos el "Cargando" global en la primera página
   if (loading && page === 1) {
     return <p className="text-center my-4">Cargando...</p>
   }
+
   if (error) {
     return <p className="text-center text-red-500 my-4">Error: {error}</p>
   }
@@ -70,7 +90,7 @@ const ItemLoader = ({ searchQuery }) => {
               <ItemCard {...item} />
             </div>
           ))
-          : !loading && ( // esto es para mostrar "no encontrados" mientras carga
+          : !loading && (
             <p className="col-span-3 text-center text-gray-500 mt-8">
               No se encontraron productos para "{searchQuery}"
             </p>
@@ -78,18 +98,14 @@ const ItemLoader = ({ searchQuery }) => {
         }
       </div>
 
-      {/* Se crea el boton de cargar mas productos si es que los hay*/}
-      {hasMore && products.length > 0 && (
-        <button
-          onClick={handleLoadMore}
-          disabled={loading}
-          className="my-8 px-6 py-3 bg-purple-500 text-white rounded-full font-bold shadow-md hover:bg-purple-600 transition-all hover:-translate-y-1 disabled:bg-purple-300 disabled:transform-none disabled:cursor-not-allowed"
-        >
-          {loading ? "Cargando más..." : "Cargar más"}
-        </button>
+      {/*este es el elemento que el observer está vigilando. */}
+      {hasMore && (
+        <div ref={loaderRef} className="h-10 w-full flex justify-center items-center my-4">
+          {loading && page > 1 && <p className="text-gray-500">Cargando más...</p>}
+        </div>
       )}
     </div>
   );
-}
+};
 
 export default ItemLoader;
