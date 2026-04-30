@@ -1,17 +1,27 @@
 export const url = "https://69f018fd112e1b968e252e01.mockapi.io/api/v1/Productos";
 
-export async function getProducts(searchQuery = "") {
-  let fetchUrl = url;
 
-   // Si hay una búsqueda, le agregamos el filtro de MockAPI a la URL
+export async function getProducts(searchQuery = "", page = 1, limit) {
+  
+  const fetchUrl = new URL(url);
+
+  fetchUrl.searchParams.append("page", page);
+  fetchUrl.searchParams.append("limit", limit);
+
+  // Si hay una búsqueda, le agregamos el filtro de MockAPI a la URL
+  //la searchQuery va a ser por el nombre del producto
   if (searchQuery) {
-    fetchUrl = `${url}?name=${searchQuery}`; 
+    fetchUrl.searchParams.append("name", searchQuery); 
   }
 
-  const response = await fetch(fetchUrl);
+  //aca se une todo automáticamente (ej: https://.../Productos?page=1&limit=6&name=muñeca)
+  const response = await fetch(fetchUrl.toString(), {
+    method: 'GET',
+    headers: {'content-type':'application/json'}
+  });
 
-  // Si MockAPI no encuentra coincidencias, devuelve 404. En ese caso devuelve un array vacío
-  if (response.status === 404 && searchQuery) {
+  // Si MockAPI no encuentra coincidencias o se pasa de página, devuelve string vacio
+  if (response.status === 404) {
     return [];
   }
 
