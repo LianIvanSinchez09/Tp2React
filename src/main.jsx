@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router/dom";
 import Home from './pages/Home/Home.jsx'
 import { Detalles } from './pages/Detalles/Detalles.jsx';
 import "./i18n.js";
+import SobreNosotros from './pages/SobreNosotros/SobreNosotros.jsx';
 
   const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ import "./i18n.js";
     {
       path : "/detalles/:id",
       element : <Detalles />
+    },
+    {
+      path : "/sobrenosotros",
+      element : <SobreNosotros />
     }
   ])
 createRoot(document.getElementById('root')).render(

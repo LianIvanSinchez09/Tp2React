@@ -12,7 +12,7 @@ export const Header = () => {
         {/* Logo */}
         <div className="text-2xl font-bold text-purple-700 flex items-center drop-shadow">
           <NavLink to="/">
-            <img className="w-20" src="logo.png" alt="Logo de IUPI" />
+            <img className="w-20" src="../../../public/logo.png" alt="Logo de IUPI" />
           </NavLink>
         </div>
 
@@ -30,14 +30,14 @@ export const Header = () => {
           </NavLink>
 
           <NavLink
-            to="/detalles"
+            to="/sobrenosotros"
             className={({ isActive }) =>
               isActive
                 ? "text-purple-700 font-bold border-b-2 border-purple-400 transition text-3xl"
                 : "text-gray-700 hover:text-pink-500 transition text-3xl"
             }
           >
-            {t("header.detalles")}
+            {t("header.SobreNosotros")}
           </NavLink>
         </nav>
 

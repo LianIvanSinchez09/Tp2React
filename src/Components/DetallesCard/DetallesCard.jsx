@@ -3,61 +3,37 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
+
 const DetallesCard = ({ item }) => {
 
-    const DetallesInfo = item[0];
-    const { t } = useTranslation();
-        
-    return (
-    <div className="flex flex-col min-h-screen">
-      <Header navigation={navigation}/>
-      <main className="grow">
-        <h1 className="text-center text-white text-5xl font-bold animate-bounce">{t("Detalles.title")}</h1>
+  const itemInfo = item[0];  
 
-        <div className="container py-5 min-h-[72vh]">
-          <div
-            className="p-5 rounded-xl  flex flex-col gap-5 relative 
-                   from-pink-200 to-blue-200  border-white "
-          >
-            <h1 className="text-center text-white text-5xl font-bold animate-bounce">
-              {t("Detalles.title2")}
-            </h1>
-
-            {/* Sección 1 */}
-            <div className="bg-white rounded-xl p-4 shadow-sm border-l-4 border-yellow-400 ">
-              <h2 className="text-center text-black font-bold mb-3 text-2xl">
-                {t("Detalles.question")}
-              </h2>
-              <p className="text-gray-800 text-lg leading-relaxed">
-                {t("Detalles.answer")}
-              </p>
+  return (
+    <div style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
+      <div className="container px-5 py-24 mx-auto" style={{ cursor: 'auto' }}>
+        <div className="lg:w-4/5 mx-auto flex flex-wrap">
+          <img
+            alt={itemInfo.name}
+            className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+            src={itemInfo.avatar}
+            style={{ cursor: 'auto' }}
+          />
+          <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" style={{ cursor: 'auto' }}>
+            <h2 className="text-sm title-font text-gray-500 tracking-widest">ON SALE</h2>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{itemInfo.name}</h1>
+            <p className="text-black">{itemInfo.description}</p>
+            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+              <div className="flex ml-6 items-center">
+              </div>
             </div>
-
-            {/* Sección 2 */}
-            <div className="bg-white rounded-xl p-4 shadow-sm border-l-4 border-green-500">
-              <h2 className="text-center text-green-600 font-bold mb-3 text-2xl">
-                {t("Detalles.question2")}
-              </h2>
-              <p className="text-gray-800 text-lg leading-relaxed">
-                {t("Detalles.answer2")}
-              </p>
-            </div>
-
-            {/* Sección 3 */}
-            <div className="bg-white rounded-xl p-4 shadow-sm border-l-4 border-red-500">
-              <h2 className="text-center text-red-600 font-bold mb-3 text-2xl">
-                {t("Detalles.question3")}
-              </h2>
-              <p className="text-gray-800 text-lg leading-relaxed">
-                {t("Detalles.answer3")}
-              </p>
+            <div className="flex">
+              <span className="title-font font-medium text-2xl text-gray-900">${itemInfo.price}</span>
             </div>
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
     </div>
-    )
-}
+  );
+};
 
 export default DetallesCard

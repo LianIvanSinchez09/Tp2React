@@ -2,7 +2,7 @@
   "home": {
     "title": "Games"
   },
-  "Detalles": {
+  "SobreNosotros": {
     "title": "About us",
     "title2": "🎉 Welcome to IUPI! 🎉",
     "question": "🧠 What is IUPI?",
@@ -14,7 +14,7 @@
   },
   "header": {
     "inicio": "Home",
-    "detalles": "Details"
+    "SobreNosotros": "About Us"
   },
   "footer" : {
 

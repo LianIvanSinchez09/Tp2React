@@ -6,6 +6,7 @@ import DetallesCard from "../../Components/DetallesCard/DetallesCard";
 import { useNavigate } from "react-router";
 import { Header } from "../../Components/Header/Header";
 import { useTranslation } from "react-i18next";
+import { getDetails } from "../../services/api";
 
 export const Detalles = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ export const Detalles = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProducts(id)
+    getDetails(id)
       .then((data) => {
         setItemInfo(data);
         setLoading(false);
@@ -26,14 +27,19 @@ export const Detalles = () => {
   }, [id]);
 
   return (
+    <>
+    <Header/>
     <div className="flex flex-col min-h-screen m-6">
       <main className="grow">
         {loading ? (
           <h1>Cargando...</h1>
         ) : (
-          <DetallesCard item={itemInfo} />
+          <DetallesCard item={itemInfo}  />
         )}
       </main>
+      <Footer/>
     </div>
+    </>
+    
   )
 }
