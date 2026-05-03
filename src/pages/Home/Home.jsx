@@ -9,6 +9,9 @@ import { Header } from '../../Components/Header/Header';
 const Home = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
+  if (!getLocalStorage("favorites")) {
+  setLocalStorage("favorites", []);
+}
   return (
     <div className="flex flex-col min-h-screen">
       <Header></Header>
