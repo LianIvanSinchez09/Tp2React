@@ -1,13 +1,8 @@
 .card {
-  --font-color: #323232;
-  --bg-color: #e0e0e0;
-  width: 250px;
-  height: 350px;
-  background: var(--bg-color);
-  display: flex;
-  flex-direction: column;
   transition: .4s;
   position: relative;
+  animation: fadeIn 0.8s ease-in-out;
+  -webkit-animation: fadeIn 0.8s ease-in-out;
 }
 
 .card:hover {
@@ -38,3 +33,11 @@
   color: var(--font-color);
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+}
+  to {
+    opacity: 1;
+  }
+}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { getProducts } from '../../services/api.js';
 import ItemCard from '../ItemCard/ItemCard.jsx';
+import Spinner from '../Spinner/Spinner.jsx';
+import ErrorComponent from '../Error/ErrorComponent.jsx';
 
 const ItemLoader = ({ searchQuery }) => {
   const [products, setProducts] = useState([]);
@@ -74,11 +76,15 @@ const ItemLoader = ({ searchQuery }) => {
 
   // Solo mostramos el "Cargando" global en la primera página
   if (loading && page === 1) {
-    return <p className="text-center my-4">Cargando...</p>
+    return( 
+      <div className="flex flex-col justify-center items-center w-full">
+        <Spinner/>
+      </div>
+    )
   }
 
   if (error) {
-    return <p className="text-center text-red-500 my-4">Error: {error}</p>
+    return <ErrorComponent message={error} type="error" />
   }
 
   return (
@@ -91,9 +97,7 @@ const ItemLoader = ({ searchQuery }) => {
             </div>
           ))
           : !loading && (
-            <p className="col-span-3 text-center text-gray-500 mt-8">
-              No se encontraron productos para "{searchQuery}"
-            </p>
+            <ErrorComponent message={searchQuery}/>
           )
         }
       </div>
@@ -101,7 +105,7 @@ const ItemLoader = ({ searchQuery }) => {
       {/*este es el elemento que el observer está vigilando. */}
       {hasMore && (
         <div ref={loaderRef} className="h-10 w-full flex justify-center items-center my-4">
-          {loading && page > 1 && <p className="text-gray-500">Cargando más...</p>}
+          {loading && page > 1 && <Spinner/>}
         </div>
       )}
     </div>

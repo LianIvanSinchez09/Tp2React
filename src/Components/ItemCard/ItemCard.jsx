@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 const ItemCard = ({ ...props }) => {
     return (
         <Link to={`/detalles/${props.id}`}>
-            <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <div class="card w-72 bg-white shadow-md rounded-xl duration-500 hover:shadow-xl">
                 <img src={props.avatar} alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
                 <div class="px-4 py-3 w-72">
                     <p class="text-lg font-bold text-black truncate block capitalize">{props.name}</p>

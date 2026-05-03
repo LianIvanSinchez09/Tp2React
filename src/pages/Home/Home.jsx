@@ -5,15 +5,22 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 import {useTranslation} from "react-i18next";
 import { getLocalStorage, setLocalStorage } from '../../services/localStorage';
 import { Header } from '../../Components/Header/Header';
+import Hero from '../../Components/Hero/Hero';
+import Spinner from '../../Components/Spinner/Spinner';
+import './Home.css'
+
 
 const Home = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header></Header>
+    <>
+    <body>
+    <Header/>
+    <div className="flex flex-col min-h-screen ">
+      <Hero/>
       <main className="grow">
-        <h1 className="text-center text-white text-5xl font-bold animate-bounce">{t("home.title")}</h1>
+        <h1 className="text-center text-white text-5xl font-bold">{t("home.title")}</h1>
         <SearchBar 
           searchQuery={searchQuery} 
           setSearchQuery={setSearchQuery} 
@@ -24,6 +31,9 @@ const Home = () => {
       
       <Footer />
     </div>
+    </body>
+    
+    </>
   
   )
 }
