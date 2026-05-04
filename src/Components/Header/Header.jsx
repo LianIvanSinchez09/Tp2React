@@ -28,6 +28,16 @@ export const Header = () => {
           >
             {t("header.inicio")}
           </NavLink>
+          <NavLink
+            to="/favoritos"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-700 font-bold border-b-2 border-purple-400 transition text-3xl"
+                : "text-gray-700 hover:text-pink-500 transition text-3xl"
+            }
+          >
+            {t("header.favoritos")}
+          </NavLink>
 
           <NavLink
             to="/sobrenosotros"

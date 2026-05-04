@@ -9,6 +9,7 @@ import { Header } from '../../Components/Header/Header';
 const Home = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
+    const [favorites, setFavorites] = useState([]);
   if (!getLocalStorage("favorites")) {
   setLocalStorage("favorites", []);
 }
@@ -21,7 +22,7 @@ const Home = () => {
           searchQuery={searchQuery} 
           setSearchQuery={setSearchQuery} 
         />
-        <ItemLoader searchQuery={searchQuery} /> 
+        <ItemLoader searchQuery={searchQuery} setFavorites={setFavorites}/> 
         
       </main>
       
