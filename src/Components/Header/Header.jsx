@@ -7,7 +7,7 @@ export const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <header className="w-screen sticky bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">
+    <header className="fixed w-screen z-20 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">
       <div className=" mx-auto px-6 py-4 flex items-center justify-between">
         
         {/* Logo */}
