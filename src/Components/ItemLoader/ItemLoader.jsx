@@ -25,13 +25,15 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
+    if(favorites){
+      setProducts(favorites);
+      setHasMore(false);
+      setLoading(false);
+      return;
+    }
       getProducts(searchQuery, page, cantProductos)
       .then(data => {
         if (Array.isArray(data)) {
-          //Aca decimos que si hay algo en la prop favorites, use eso en vez de la api.
-          if(favorites){
-            data = favorites;
-          }
           if (page === 1) {
             setProducts(data);
           } else {
