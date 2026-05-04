@@ -20,7 +20,8 @@
     "header" :{
 
         "inicio" : "Inicio",
-        "SobreNosotros" : "Sobre Nosotros"
+        "SobreNosotros" : "Sobre Nosotros",
+        "favoritos" : "Favoritos"
     },
     "footer" : {
 

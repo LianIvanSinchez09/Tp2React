@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { getProducts } from '../../services/api.js';
 import ItemCard from '../ItemCard/ItemCard.jsx';
+import { getLocalStorage } from '../../services/localStorage.js';
 
-const ItemLoader = ({ searchQuery }) => {
+const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,9 +25,13 @@ const ItemLoader = ({ searchQuery }) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    getProducts(searchQuery, page, cantProductos)
+      getProducts(searchQuery, page, cantProductos)
       .then(data => {
         if (Array.isArray(data)) {
+          //Aca decimos que si hay algo en la prop favorites, use eso en vez de la api.
+          if(favorites){
+            data = favorites;
+          }
           if (page === 1) {
             setProducts(data);
           } else {
@@ -44,8 +49,9 @@ const ItemLoader = ({ searchQuery }) => {
       .catch(err => {
         setError(err.message);
         setLoading(false);
-      });
-  }, [searchQuery, page]);
+      })
+    
+  }, [searchQuery, page, favorites]);
 
   // Effect para el intersection observer (scroll infinito)
   useEffect(() => {
@@ -74,7 +80,7 @@ const ItemLoader = ({ searchQuery }) => {
 
   // Solo mostramos el "Cargando" global en la primera página
   if (loading && page === 1) {
-    return <p className="text-center my-4">Cargando...</p>
+    return <p className="text-center my-4 text-white">Cargando...</p>
   }
 
   if (error) {
@@ -87,7 +93,7 @@ const ItemLoader = ({ searchQuery }) => {
         {products.length > 0
           ? products.map((item) => (
             <div key={item.id}>
-              <ItemCard {...item} />
+              <ItemCard {...item} setFavorites={setFavorites} />
             </div>
           ))
           : !loading && (
