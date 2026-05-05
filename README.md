@@ -1,16 +1,36 @@
-# React + Vite
+# IUPI - Catálogo de Juegos 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+IUPI es una aplicación web desarrollada en **React** que funciona como un catálogo interactivo de juegos y materiales educativos e inclusivos. La plataforma está diseñada para acompañar a padres, docentes y profesionales en el proceso de enseñanza a través de materiales didácticos.
 
-Currently, two official plugins are available:
+## Características Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Catálogo Dinámico**: Visualización de productos obtenida a través de una API REST (MockAPI).
+* **Búsqueda en Tiempo Real**: Barra de búsqueda funcional que filtra los artículos por nombre.
+* **Scroll Infinito**: Implementación de carga progresiva de productos mediante `Intersection Observer`.
+* **Gestión de Favoritos**: Sistema para guardar y eliminar productos favoritos con persistencia de datos en el navegador utilizando `localStorage`.
+* **Soporte Multilingüe (i18n)**: Interfaz disponible en Español e Inglés, permitiendo el cambio de idioma de forma instantánea.
+* **Navegación Intuitiva**: Uso de rutas dinámicas para ver el detalle específico de cada producto.
+* **Diseño Responsive**: Interfaz adaptable a dispositivos móviles y escritorio utilizando **Tailwind CSS**.
 
-## React Compiler
+## Tecnologías utilizadas: 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **React**: Biblioteca principal para la interfaz de usuario.
+* **Vite**: Herramienta de construcción para un desarrollo rápido.
+* **React Router**: Gestión de navegación y rutas de la aplicación.
+* **Tailwind CSS**: Framework de utilidades CSS para el estilizado.
+* **i18next**: Librería para la internacionalización y manejo de traducciones.
+* **MockAPI**: Servicio utilizado para simular el backend y la persistencia de productos.
 
-## Expanding the ESLint configuration
+## Estructura del Proyecto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* `Components/`: Contiene los componentes reutilizables como el Header, Footer, ItemCard y SearchBar.
+* `pages/`: Define las vistas principales: Home, Detalles, Favoritos y Sobre Nosotros.
+* `services/`: Lógica para el consumo de la API y el manejo del LocalStorage.
+* `locales/`: Archivos JSON con las traducciones para el soporte multiidioma.
+* `assets/`: Recursos estáticos como imágenes y logotipos.
+
+## Integrantes 
+
+* **Lian Ivan Sinchez FAI-4202**
+* **Lucas San Segundo FAI-1921**
+* **Joaquin Ignacio Castillo FAI-5521**

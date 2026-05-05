@@ -7,6 +7,7 @@ import Home from './pages/Home/Home.jsx';
 import { Detalles } from './pages/Detalles/Detalles.jsx';
 import "./i18n.js";
 import SobreNosotros from './pages/SobreNosotros/SobreNosotros.jsx';
+import Favoritos from './pages/Favoritos/Favoritos.jsx'
 
   const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ import SobreNosotros from './pages/SobreNosotros/SobreNosotros.jsx';
     {
       path : "/sobrenosotros",
       element : <SobreNosotros />
+    },
+    {
+      path : "/favoritos",
+      element : <Favoritos />
     }
   ])
 createRoot(document.getElementById('root')).render(

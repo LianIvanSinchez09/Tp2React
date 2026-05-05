@@ -20,11 +20,19 @@
     "header" :{
 
         "inicio" : "Inicio",
-        "SobreNosotros" : "Sobre Nosotros"
+        "SobreNosotros" : "Sobre Nosotros",
+        "favoritos" : "Favoritos"
     },
     "footer" : {
 
         "integers" : "Integrantes"
+    },
+    "details" : {
+        "onSale" : "En venta"
+    },
+    "general" : {
+        "loading" : "Loading"
     }
+
 
 }

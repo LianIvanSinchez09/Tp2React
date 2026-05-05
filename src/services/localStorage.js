@@ -2,8 +2,15 @@
 // ej: Hacer peticiones HTTP (fetch), consumir APIs, etc
 
 export const getLocalStorage = (key) => {
-  return localStorage.getItem(key); // devuelve string directamente
+  const item = localStorage.getItem(key); // devuelve string directamente
+  if (!item) return null;
+  try{
+    return JSON.parse(item);
+  }
+  catch{
+    return item;
+  }
 };
 export const setLocalStorage = (key, value) => {
-    localStorage.setItem(key, value)
+    localStorage.setItem(key, JSON.stringify(value))
 } 

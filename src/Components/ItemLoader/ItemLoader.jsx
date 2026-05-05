@@ -3,8 +3,9 @@ import { getProducts } from '../../services/api.js';
 import ItemCard from '../ItemCard/ItemCard.jsx';
 import Spinner from '../Spinner/Spinner.jsx';
 import ErrorComponent from '../Error/ErrorComponent.jsx';
+import { getLocalStorage } from '../../services/localStorage.js';
 
-const ItemLoader = ({ searchQuery }) => {
+const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,7 +27,13 @@ const ItemLoader = ({ searchQuery }) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    getProducts(searchQuery, page, cantProductos)
+    if(favorites){
+      setProducts(favorites);
+      setHasMore(false);
+      setLoading(false);
+      return;
+    }
+      getProducts(searchQuery, page, cantProductos)
       .then(data => {
         if (Array.isArray(data)) {
           if (page === 1) {
@@ -46,8 +53,9 @@ const ItemLoader = ({ searchQuery }) => {
       .catch(err => {
         setError(err.message);
         setLoading(false);
-      });
-  }, [searchQuery, page]);
+      })
+    
+  }, [searchQuery, page, favorites]);
 
   // Effect para el intersection observer (scroll infinito)
   useEffect(() => {
@@ -92,7 +100,7 @@ const ItemLoader = ({ searchQuery }) => {
         {products.length > 0
           ? products.map((item) => (
             <div key={item.id}>
-              <ItemCard {...item} />
+              <ItemCard {...item} setFavorites={setFavorites} />
             </div>
           ))
           : !loading && (

@@ -21,6 +21,7 @@ export const LanguageSwitcher = () => {
 >
   <option value="es">Español</option>
   <option value="en">Inglés</option>
+  <option value="pg">Guaraní</option>
 </select>
 
   );
