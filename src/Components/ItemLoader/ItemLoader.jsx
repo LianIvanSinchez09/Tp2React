@@ -86,7 +86,6 @@ const ItemLoader = ({ searchQuery }) => {
   if (error) {
     return <ErrorComponent message={error} type="error" />
   }
-
   return (
     <div className="flex flex-col items-center w-full">
       <div className='grid place-items-center grid-cols-1 md:grid-cols-3 gap-4 m-4 w-full'>

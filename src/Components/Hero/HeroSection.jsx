@@ -1,78 +1,55 @@
-import "./hero.css";
+import './Hero.css';
+import { getProducts } from "../../services/api";
+import FloatingCard from "../FloatingCard/FloatingCard";
 
-const FLOATING_CARDS = [
-  {
-    id: 1,
-    floatClass: "float-card-1",
-    position: "top-[18%] left-[5%]",
-    label: "Mejor oferta",
-    value: "$65",
-    sub: "Sleek Granite Cheese",
-    tag: "-20% hoy",
-  },
-  {
-    id: 2,
-    floatClass: "float-card-2",
-    position: "bottom-[22%] left-[8%]",
-    label: "Nuevo ingreso",
-    value: "$83",
-    sub: "Handcrafted Metal Car",
-    tag: "Tendencia",
-  },
-  {
-    id: 3,
-    floatClass: "float-card-3",
-    position: "top-[22%] right-[5%]",
-    label: "Más vendido",
-    value: "$70",
-    sub: "Bespoke Rubber Chips",
-    tag: "★ 4.9",
-  },
-  {
-    id: 4,
-    floatClass: "float-card-4",
-    position: "bottom-[18%] right-[7%]",
-    label: "Envío gratis",
-    value: "+500",
-    sub: "productos disponibles",
-    tag: null,
-  },
-];
+const products = await getProducts("", 1, 50)
 
-const STATS = [
-  { num: "500+", label: "Productos" },
-  { num: "12k",  label: "Clientes felices" },
-  { num: "4.9★", label: "Valoración" },
-];
+let productList = []
+let indexNew = 4
 
-export default function HeroSection() {
+const RandomProductList = (products, indexNew) => {
+  for (let index = 0; index < indexNew; index++) {
+    let randomProd = products[Math.floor(Math.random() * products.length)]
+    if(!productList.includes(randomProd) && productList.length < 4){
+      productList.push(randomProd)
+    }else{
+      if(productList.length < 4){
+        indexNew = indexNew - index
+        RandomProductList(products, indexNew)
+      }
+    }    
+  }
+}
+
+RandomProductList(products, indexNew) 
+
+export default function HeroSection({ handleScroll }) {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center fondo-custom"
       style={{
         background:
-          "linear-gradient(135deg, #f9d0e8 0%, #e8d5f5 35%, #cdd8f8 70%, #b8cef6 100%)",
+          "linear-gradient(135deg, #f9d0e8 0%, #e8d5f5 35%, #cdd8f8 70%, #b8cef6 100%)"
       }}
     >
-      {/* ── Blobs ─────────────────────────────────────────── */}
       <div
-        className="blob-1 absolute w-130 h-130 -top-30 -left-25"
+        className="absolute w-130 h-130 -top-30 -left-25"
         style={{ background: "rgba(255, 200, 230, 0.45)" }}
       />
       <div
-        className="blob-2 absolute w-100 h-100 -bottom-20 -right-20"
+        className="absolute w-100 h-100 bottom-0 -right-20"
         style={{ background: "rgba(180, 160, 240, 0.35)" }}
       />
       <div
-        className="blob-3 absolute w-65 h-65 top-[30%] right-[15%]"
+        className="absolute w-65 h-65 top-[30%] right-[15%]"
         style={{ background: "rgba(160, 200, 255, 0.3)" }}
       />
 
-      {/* ── Floating product cards ─────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none z-5 hidden md:block">
-        {/* {FLOATING_CARDS.map((card) => (
-
-        ))} */}
+      <div className=" pointer-events-none z-5 hidden md:block">
+        <FloatingCard product={productList[0]} position={"top-[18%] left-[5%]"} floatClass={"float-card-1"} />
+        <FloatingCard product={productList[1]} position={"bottom-[22%] left-[8%]"} floatClass={"float-card-2"} />
+        <FloatingCard product={productList[2]} position={"top-[22%] right-[5%]"} floatClass={"float-card-3"} />
+        <FloatingCard product={productList[3]} position={"bottom-[18%] right-[7%]"} floatClass={"float-card-4"} />
       </div>
 
       <div className="relative z-10 text-center max-w-3xl px-6">
@@ -84,12 +61,9 @@ export default function HeroSection() {
             color: "#2d1a5c",
           }}
         >
-          Todo lo que querés,
-          <br />
-          <span className="gradient-text">en un solo lugar</span>
+          Todo lo que querés, 
+          <span className="gradient-text"> en un solo lugar</span>
         </h1>
-
-        {/* Subtitle */}
         <p
           className="fade-up fade-up-d3 text-[17px] font-light leading-relaxed max-w-xl mx-auto mb-10"
           style={{ color: "#5a4080" }}
@@ -105,6 +79,7 @@ export default function HeroSection() {
               boxShadow: "0 8px 28px rgba(130, 70, 220, 0.38)",
               border: "none",
             }}
+            onClick={handleScroll}
           >
             Explorar productos
           </button>

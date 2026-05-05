@@ -4,9 +4,6 @@ import { Link } from 'react-router'
 
 const ItemCard = ({ ...props }) => {
 
-    console.log(props);
-    
-
     return (
         <Link to={`/detalles/${props.id}`}>
             <div className="card w-72 bg-white shadow-md rounded-xl duration-500 hover:shadow-xl">
