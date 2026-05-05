@@ -10,7 +10,7 @@ import { getDetails } from "../../services/api";
 
 export const Detalles = () => {
   const { id } = useParams();
-
+  const { t } = useTranslation();
   const [itemInfo, setItemInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +32,7 @@ export const Detalles = () => {
     <div className="flex flex-col min-h-screen m-6">
       <main className="grow">
         {loading ? (
-          <h1>Cargando...</h1>
+          t("general.loading")
         ) : (
           <DetallesCard item={itemInfo}  />
         )}

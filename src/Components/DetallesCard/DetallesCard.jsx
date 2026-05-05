@@ -6,6 +6,8 @@ import { Favorite } from "../Favorite/Favorite";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 
 const DetallesCard = ({ item }) => {
+  const { t } = useTranslation();
+
   const [favorites, setFavorites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(() => {
     const arrayLocal = getLocalStorage("favorites") || [];
@@ -47,7 +49,7 @@ const DetallesCard = ({ item }) => {
           >
             <div className="flex items-center w-full h-10">
               <h2 className="flex-1 pl-5 text-center text-2xl title-font text-gray-500 tracking-widest leading-none">
-                ON SALE
+                {t("details.onSale")}
               </h2>
               <Favorite
                 handleFavorite={handleFavorite}

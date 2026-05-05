@@ -26,6 +26,13 @@
     "footer" : {
 
         "integers" : "Integrantes"
+    },
+    "details" : {
+        "onSale" : "En venta"
+    },
+    "general" : {
+        "loading" : "Loading"
     }
+
 
 }
