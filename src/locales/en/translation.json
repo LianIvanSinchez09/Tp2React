@@ -14,10 +14,16 @@
   },
   "header": {
     "inicio": "Home",
-    "SobreNosotros": "About Us"
+    "SobreNosotros": "About Us",
+    "favoritos": "Favorites"
   },
-  "footer" : {
-
-        "integers" : "Members"
-    }
+  "footer": {
+    "integers": "Team members"
+  },
+  "details": {
+    "onSale": "On sale"
+  },
+  "general": {
+    "loading": "Loading"
+  }
 }
