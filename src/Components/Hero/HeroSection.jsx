@@ -1,4 +1,3 @@
-import './Hero.css';
 import { getProducts } from "../../services/api";
 import FloatingCard from "../FloatingCard/FloatingCard";
 
@@ -14,7 +13,7 @@ const RandomProductList = (products, indexNew) => {
       productList.push(randomProd)
     }else{
       if(productList.length < 4){
-        indexNew = indexNew - index
+        indexNew = indexNew < 1 ? indexNew : indexNew - index
         RandomProductList(products, indexNew)
       }
     }    
@@ -26,7 +25,7 @@ RandomProductList(products, indexNew)
 export default function HeroSection({ handleScroll }) {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center fondo-custom"
+      className="relative min-h-screen flex items-center justify-center"
       style={{
         background:
           "linear-gradient(135deg, #f9d0e8 0%, #e8d5f5 35%, #cdd8f8 70%, #b8cef6 100%)"
@@ -46,10 +45,10 @@ export default function HeroSection({ handleScroll }) {
       />
 
       <div className=" pointer-events-none z-5 hidden md:block">
-        <FloatingCard product={productList[0]} position={"top-[18%] left-[5%]"} floatClass={"float-card-1"} />
-        <FloatingCard product={productList[1]} position={"bottom-[22%] left-[8%]"} floatClass={"float-card-2"} />
-        <FloatingCard product={productList[2]} position={"top-[22%] right-[5%]"} floatClass={"float-card-3"} />
-        <FloatingCard product={productList[3]} position={"bottom-[18%] right-[7%]"} floatClass={"float-card-4"} />
+        <FloatingCard product={productList[0]} position={"top-[18%] left-[5%]"}  />
+        <FloatingCard product={productList[1]} position={"bottom-[22%] left-[8%]"}  />
+        <FloatingCard product={productList[2]} position={"top-[22%] right-[5%]"}  />
+        <FloatingCard product={productList[3]} position={"bottom-[18%] right-[7%]"}  />
       </div>
 
       <div className="relative z-10 text-center max-w-3xl px-6">

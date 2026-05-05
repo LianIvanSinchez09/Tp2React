@@ -15,7 +15,10 @@ const ErrorComponent = ({ message, type = "not-found" }) => {
 
   const { className, text } = config[type] ?? config["not-found"]
 
-  return <p className={className}>{text}</p>
+  return <p 
+  className={className}>
+    {text}
+  </p>
 }
 
 export default ErrorComponent
