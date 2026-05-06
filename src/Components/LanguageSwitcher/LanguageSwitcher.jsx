@@ -1,6 +1,5 @@
 import React from "react";
 import { useLanguage } from "../../Hooks/useLanguage.jsx";
-import { getProducts, setLocalStorage } from "../../services/api";
 
 
 export const LanguageSwitcher = () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ErrorComponent from "../Error/ErrorComponent";
 import { useTranslation } from "react-i18next";
-import { getProducts, setLocalStorage } from "../../services/api";
 
 
 const SearchBar = ({

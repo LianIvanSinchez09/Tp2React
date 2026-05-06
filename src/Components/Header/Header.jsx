@@ -2,7 +2,6 @@ import { NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import './Header.css'
-import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {

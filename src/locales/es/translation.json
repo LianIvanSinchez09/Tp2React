@@ -37,7 +37,9 @@
     },
     "Favorites": {
         "noFavoritesMessage": "Todavía no tienes favoritos",
-        "titulo": "Favoritos"
+        "titulo": "Favoritos",
+        "notfound": "No se encontraron resultados"
+
     },
     "SearchBar": {
         "placeholder": "Busca un articulo..."

@@ -5,72 +5,71 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useTranslation } from "react-i18next";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { Header } from "../../Components/Header/Header";
-import { getProducts, setLocalStorage } from '../../services/localStorage';
+import { useLanguage } from "../../Hooks/useLanguage";
 
 const Favorites = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [favoritesSearch, setfavoritesSearch] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const cantProductos = 6;
-  const [error, setError] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
-  const [results, setResults] = useState([]);
 
-  // inicializar favoritos desde localStorage
+  useLanguage();
+
   useEffect(() => {
     setFavorites(getLocalStorage("favorites"));
   }, []);
 
   useEffect(() => {
-    if(searchQuery.length > 0){
-      setLoading(true);
-      setError(null);
-      const favoritesFilter = favorites.filter((item)=>{
-        return item.name?.toLowerCase().includes(searchQuery.toLowerCase());
-      })
-      setfavoritesSearch(favoritesFilter)
-      setLoading(false);
-    }else{
-      setfavoritesSearch(favorites)
+    if (searchQuery.length > 0) {
+      setfavoritesSearch(
+        favorites.filter((item) =>
+          item.name?.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+    } else {
+      setfavoritesSearch(favorites);
     }
-  }, [searchQuery, page, favorites]);
-  
-  console.log(favoritesSearch);
-  
+  }, [searchQuery, favorites]);
+
+  const getFavoritesMessage = () => {
+    if (searchQuery.length > 0 && favoritesSearch.length === 0) {
+      return t("Favorites.notfound");
+    }
+    if (favorites.length === 0) {
+      return t("Favorites.noFavoritesMessage");
+    }
+    return null;
+  };
 
   return (
-
     <div className="flex flex-col min-h-screen">
-      <Header/>
+      <Header />
       <main className="grow mt-40">
-      <div 
-      className="relative z-10 flex justify-center items-center "
-      >
-        <div
-          className="fade-up fade-up-d2 font-serif font-black leading-[1.08] mb-5"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(20px, 6.5vw, 78px)",
-            color: "#2d1a5c",
-          }}
+        <div className="relative z-10 flex justify-center items-center">
+          <div
+            className="fade-up fade-up-d2 font-serif font-black leading-[1.08] mb-5"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(20px, 6.5vw, 78px)",
+              color: "#2d1a5c",
+            }}
           >
-          {t("Favorites.titulo")}
-        </div>
+            {t("Favorites.titulo")}
+          </div>
         </div>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {favoritesSearch?.length > 0 ? (
-          //pasamos el useState completo para que se vaya modificando a medida que se vaya usando
-          <ItemLoader favorites={favoritesSearch} setFavorites={setFavorites} searchQuery={searchQuery} />
+          <ItemLoader
+            favorites={favoritesSearch}
+            setFavorites={setFavorites}
+            searchQuery={searchQuery}
+          />
         ) : (
           <p className="text-center text-black m-10 text-2xl mt-10">
-            {t("Favorites.noFavoritesMessage")}
+            {getFavoritesMessage()}
           </p>
         )}
       </main>
-
       <Footer />
     </div>
   );
