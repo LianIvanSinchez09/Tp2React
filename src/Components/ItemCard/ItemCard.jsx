@@ -44,7 +44,7 @@ const ItemCard = ({
   };
 
   return (
-    <div className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+    <div className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:shadow-2xl">
       <Link to={`/detalles/${props.id}`}>
         <div>
           <img

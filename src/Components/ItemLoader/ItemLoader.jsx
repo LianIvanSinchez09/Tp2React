@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { getProducts } from '../../services/api.js';
 import ItemCard from '../ItemCard/ItemCard.jsx';
+import Spinner from '../Spinner/Spinner.jsx';
+import ErrorComponent from '../Error/ErrorComponent.jsx';
 import { getLocalStorage } from '../../services/localStorage.js';
 
 const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
@@ -82,13 +84,16 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
 
   // Solo mostramos el "Cargando" global en la primera página
   if (loading && page === 1) {
-    return <p className="text-center my-4 text-white">Cargando...</p>
+    return( 
+      <div className="flex flex-col justify-center items-center w-full">
+        <Spinner/>
+      </div>
+    )
   }
 
   if (error) {
-    return <p className="text-center text-red-500 my-4">Error: {error}</p>
+    return <ErrorComponent message={error} type="error" />
   }
-
   return (
     <div className="flex flex-col items-center w-full">
       <div className='grid place-items-center grid-cols-1 md:grid-cols-3 gap-4 m-4 w-full'>
@@ -99,9 +104,7 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
             </div>
           ))
           : !loading && (
-            <p className="col-span-3 text-center text-gray-500 mt-8">
-              No se encontraron productos para "{searchQuery}"
-            </p>
+            <ErrorComponent message={searchQuery}/>
           )
         }
       </div>
@@ -109,7 +112,7 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
       {/*este es el elemento que el observer está vigilando. */}
       {hasMore && (
         <div ref={loaderRef} className="h-10 w-full flex justify-center items-center my-4">
-          {loading && page > 1 && <p className="text-gray-500">Cargando más...</p>}
+          {loading && page > 1 && <Spinner/>}
         </div>
       )}
     </div>

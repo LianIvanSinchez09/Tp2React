@@ -15,20 +15,33 @@ const Favorites = () => {
   useEffect(() => {
     setFavorites(getLocalStorage("favorites"));
   }, []);
+
   return (
+
     <div className="flex flex-col min-h-screen">
-      <Header></Header>
-      <main className="grow">
-        <h1 className="text-center text-white text-5xl font-bold animate-bounce">
-          {t("header.favoritos")}
-        </h1>
+      <Header/>
+      <main className="grow mt-40">
+      <div 
+      className="relative z-10 flex justify-center items-center "
+      >
+        <div
+          className="fade-up fade-up-d2 font-serif font-black leading-[1.08] mb-5"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(20px, 6.5vw, 78px)",
+            color: "#2d1a5c",
+          }}
+          >
+          {t("Favorites.titulo")}
+        </div>
+        </div>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {favorites.length > 0 ? (
           //pasamos el useState completo para que se vaya modificando a medida que se vaya usando
           <ItemLoader favorites={favorites} setFavorites={setFavorites} searchQuery={searchQuery} />
         ) : (
-          <p className="text-center text-white m-10 text-2xl">
-            {t("noFavoritesMessage", "Todavía no tienes favoritos")}
+          <p className="text-center text-black m-10 text-2xl mt-10">
+            {t("Favorites.noFavoritesMessage")}
           </p>
         )}
       </main>
