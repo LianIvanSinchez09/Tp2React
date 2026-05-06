@@ -1,5 +1,6 @@
 import { getProducts } from "../../services/api";
 import FloatingCard from "../FloatingCard/FloatingCard";
+import { useTranslation } from "react-i18next";
 
 const products = await getProducts("", 1, 50)
 
@@ -23,6 +24,8 @@ const RandomProductList = (products, indexNew) => {
 RandomProductList(products, indexNew) 
 
 export default function HeroSection({ handleScroll }) {
+  const { t } = useTranslation();
+
   return (
     <section
       className="relative min-h-screen flex items-center justify-center"
@@ -60,15 +63,14 @@ export default function HeroSection({ handleScroll }) {
             color: "#2d1a5c",
           }}
         >
-          Todo lo que querés, 
-          <span className="gradient-text"> en un solo lugar</span>
+          {t("hero.title")}
+          <span className="gradient-text"> {t("hero.titleHighlight")}</span>
         </h1>
         <p
           className="fade-up fade-up-d3 text-[17px] font-light leading-relaxed max-w-xl mx-auto mb-10"
           style={{ color: "#5a4080" }}
         >
-          Descubrí miles de productos únicos con los mejores precios y envío
-          rápido directo a tu puerta.
+          {t("hero.subtitle")}
         </p>
         <div className="fade-up fade-up-d4 flex flex-wrap gap-4 justify-center">
           <button
@@ -80,7 +82,7 @@ export default function HeroSection({ handleScroll }) {
             }}
             onClick={handleScroll}
           >
-            Explorar productos
+            {t("hero.cta")}
           </button>
         </div>
       </div>

@@ -33,7 +33,9 @@ const DetallesCard = ({ item }) => {
   const itemInfo = item[0];
 
   return (
-    <div style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}>
+    <div style={{ 
+      marginTop:"20px",
+      backgroundColor: "rgba(0, 0, 0, 0)" }}>
       <div className="container px-5 py-24 mx-auto" style={{ cursor: "auto" }}>
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img

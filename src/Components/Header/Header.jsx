@@ -1,9 +1,12 @@
 import { NavLink } from "react-router";
+import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
+import './Header.css'
+import { getLocalStorage, } from "../../services/localStorage";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // 👈 un solo useTranslation
 
   return (
     <header className="fixed w-screen z-20 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">
@@ -17,31 +20,26 @@ export const Header = () => {
         </div>
 
         {/* Navegación */}
-        <nav className="flex gap-6 font-medium text-xs">
-          <NavLink
+        <nav className="flex gap-6 font-medium text-2xl">
+          <NavLink className={"navlink navlinkCustom"}
             to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "text-purple-700 font-bold border-b-2 border-purple-400 transition text-2xl"
-                : "text-gray-700 hover:text-pink-500 transition text-3xl"
-            }
           >
             {t("header.inicio")}
           </NavLink>
-
+          <NavLink
+            to="/favoritos"
+            className={"navlink navlinkCustom"}
+          >
+            {t("header.favoritos")}
+          </NavLink>
           <NavLink
             to="/sobrenosotros"
-            className={({ isActive }) =>
-              isActive
-                ? "text-purple-700 font-bold border-b-2 border-purple-400 transition text-2xl"
-                : "text-gray-700 hover:text-pink-500 transition text-2xl"
-            }
+            className={"navlink navlinkCustom"}
           >
             {t("header.SobreNosotros")}
           </NavLink>
         </nav>
 
-        {/* Selector de idioma */}
         <div className="ml-4">
           <LanguageSwitcher />
         </div>

@@ -5,11 +5,6 @@
   -webkit-animation: fadeIn 0.8s ease-in-out;
 }
 
-.card:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 0px 10px 2px #5a5a5a;
-}
-
 .card__img {
   width: 100%;
   height: auto;
@@ -22,15 +17,10 @@
 }
 
 .card__title {
-  color: var(--font-color);
   text-align: center;
   margin-bottom: 15px;
   font-weight: 900;
   font-size: 16px;
-}
-
-.card__descr {
-  color: var(--font-color);
 }
 
 @keyframes fadeIn {

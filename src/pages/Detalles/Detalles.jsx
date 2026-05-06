@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { Header } from "../../Components/Header/Header";
 import { useTranslation } from "react-i18next";
 import { getDetails } from "../../services/api";
+import Spinner from "../../Components/Spinner/Spinner";
 
 export const Detalles = () => {
   const { id } = useParams();
@@ -29,10 +30,10 @@ export const Detalles = () => {
   return (
     <>
     <Header/>
-    <div className="flex flex-col min-h-screen m-6">
-      <main className="grow">
+    <div className="flex flex-col min-h-screen">
+      <main className="grow flex m-20 justify-center">
         {loading ? (
-          t("general.loading")
+          <Spinner/>
         ) : (
           <DetallesCard item={itemInfo}  />
         )}
