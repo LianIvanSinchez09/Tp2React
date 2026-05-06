@@ -37,7 +37,8 @@
     },
     "Favorites": {
         "noFavoritesMessage": "Nderekoiva'erã mborayhu",
-        "titulo": "Umi mba'e ojehayhuvéva"
+        "titulo": "Umi mba'e ojehayhuvéva",
+        "notfound": "Ndojejuhúi resultado"
     },
     "SearchBar": {
         "placeholder": "Eheka peteĩ artíkulo..."

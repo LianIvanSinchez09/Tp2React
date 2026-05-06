@@ -1,6 +1,7 @@
 import React from "react";
 import { useLanguage } from "../../Hooks/useLanguage.jsx";
 
+
 export const LanguageSwitcher = () => {
   const { language, changeLanguage } = useLanguage();
 

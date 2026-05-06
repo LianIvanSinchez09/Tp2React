@@ -37,7 +37,8 @@
     },
     "Favorites": {
         "noFavoritesMessage": "You have no favorites yet",
-        "titulo": "Favorites"
+        "titulo": "Favorites",
+        "notfound": "No matching results"
     },
     "SearchBar": {
         "placeholder": "Search an item..."
@@ -46,4 +47,5 @@
 
         "title" : "Page not found"
     }
+    
 }
