@@ -5,16 +5,41 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useTranslation } from "react-i18next";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { Header } from "../../Components/Header/Header";
+import { getProducts } from "../../services/api";
 
 const Favorites = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [favoritesSearch, setfavoritesSearch] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const cantProductos = 6;
+  const [error, setError] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [results, setResults] = useState([]);
 
   // inicializar favoritos desde localStorage
   useEffect(() => {
     setFavorites(getLocalStorage("favorites"));
   }, []);
+
+  useEffect(() => {
+    if(searchQuery.length > 0){
+      setLoading(true);
+      setError(null);
+      const favoritesFilter = favorites.filter((item)=>{
+        return item.name?.toLowerCase().includes(searchQuery.toLowerCase());
+      })
+      setfavoritesSearch(favoritesFilter)
+      setLoading(false);
+    }else{
+      setfavoritesSearch(favorites)
+    }
+  }, [searchQuery, page, favorites]);
+  
+  console.log(favoritesSearch);
+  
 
   return (
 
@@ -36,9 +61,9 @@ const Favorites = () => {
         </div>
         </div>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        {favorites.length > 0 ? (
+        {favoritesSearch?.length > 0 ? (
           //pasamos el useState completo para que se vaya modificando a medida que se vaya usando
-          <ItemLoader favorites={favorites} setFavorites={setFavorites} searchQuery={searchQuery} />
+          <ItemLoader favorites={favoritesSearch} setFavorites={setFavorites} searchQuery={searchQuery} />
         ) : (
           <p className="text-center text-black m-10 text-2xl mt-10">
             {t("Favorites.noFavoritesMessage")}

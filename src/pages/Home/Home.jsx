@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '../../Components/Header/Header';
 import HeroSection from '../../Components/Hero/HeroSection';
 import { useLanguage } from '../../Hooks/useLanguage.jsx';
-import { getLocalStorage } from '../../services/localStorage.js';
+import { getLocalStorage, setLocalStorage } from '../../services/localStorage.js';
 
 const Home = () => {
   const { t } = useTranslation();
