@@ -8,7 +8,6 @@ import { Header } from "../../Components/Header/Header";
 
 const Favorites = () => {
   const { t } = useTranslation();
-  const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
 
   // inicializar favoritos desde localStorage
@@ -35,10 +34,9 @@ const Favorites = () => {
           {t("Favorites.titulo")}
         </div>
         </div>
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {favorites.length > 0 ? (
           //pasamos el useState completo para que se vaya modificando a medida que se vaya usando
-          <ItemLoader favorites={favorites} setFavorites={setFavorites} searchQuery={searchQuery} />
+          <ItemLoader favorites={favorites} setFavorites={setFavorites}/>
         ) : (
           <p className="text-center text-black m-10 text-2xl mt-10">
             {t("Favorites.noFavoritesMessage")}
