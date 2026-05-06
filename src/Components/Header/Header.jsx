@@ -2,11 +2,11 @@ import { NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import './Header.css'
-import { getLocalStorage, } from "../../services/localStorage";
+import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {
-  const { t, i18n } = useTranslation(); // 👈 un solo useTranslation
+  const { t, i18n } = useTranslation();
 
   return (
     <header className="fixed w-screen z-20 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">

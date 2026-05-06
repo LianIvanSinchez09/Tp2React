@@ -5,6 +5,7 @@ import { Footer } from "../Footer/Footer";
 import { Favorite } from "../Favorite/Favorite";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 
+
 const DetallesCard = ({ item }) => {
   const { t } = useTranslation();
 
@@ -34,7 +35,6 @@ const DetallesCard = ({ item }) => {
 
   return (
     <div style={{ 
-      marginTop:"20px",
       backgroundColor: "rgba(0, 0, 0, 0)" }}>
       <div className="container px-5 py-24 mx-auto" style={{ cursor: "auto" }}>
         <div className="lg:w-4/5 mx-auto flex flex-wrap">

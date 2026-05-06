@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Header } from "../../Components/Header/Header";
 import { Footer } from "../../Components/Footer/Footer";
 import SNCard from "./SNCard";
+import { getProducts, setLocalStorage } from '../../services/localStorage';
 import "./SobreNosotros.css";
 
 const SobreNosotros = () => {

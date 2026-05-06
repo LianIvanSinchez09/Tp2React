@@ -1,6 +1,7 @@
 import { getProducts } from "../../services/api";
 import FloatingCard from "../FloatingCard/FloatingCard";
 import { useTranslation } from "react-i18next";
+import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 
 const products = await getProducts("", 1, 50)
 

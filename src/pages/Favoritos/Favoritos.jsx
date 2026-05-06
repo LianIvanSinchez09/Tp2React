@@ -5,7 +5,7 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import { useTranslation } from "react-i18next";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { Header } from "../../Components/Header/Header";
-import { getProducts } from "../../services/api";
+import { getProducts, setLocalStorage } from '../../services/localStorage';
 
 const Favorites = () => {
   const { t } = useTranslation();

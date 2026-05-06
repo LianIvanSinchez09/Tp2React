@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { getDetails } from "../../services/api";
 import Spinner from "../../Components/Spinner/Spinner";
 
+
 export const Detalles = () => {
   const { id } = useParams();
   const { t } = useTranslation();

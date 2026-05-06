@@ -3,7 +3,7 @@ import { getProducts } from '../../services/api.js';
 import ItemCard from '../ItemCard/ItemCard.jsx';
 import Spinner from '../Spinner/Spinner.jsx';
 import ErrorComponent from '../Error/ErrorComponent.jsx';
-import { getLocalStorage } from '../../services/localStorage.js';
+import { getLocalStorage } from "../../services/localStorage";
 
 const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   const [products, setProducts] = useState([]);
