@@ -41,5 +41,10 @@
     },
     "SearchBar": {
         "placeholder": "Busca un articulo..."
+    },
+    "404" : {
+
+        "title" : "Pagina no encontrada"
     }
+
 }
