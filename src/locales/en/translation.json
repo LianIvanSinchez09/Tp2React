@@ -41,5 +41,9 @@
     },
     "SearchBar": {
         "placeholder": "Search an item..."
+    },
+    "404" : {
+
+        "title" : "Page not found"
     }
 }

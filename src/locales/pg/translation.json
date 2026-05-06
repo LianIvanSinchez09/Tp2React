@@ -41,5 +41,9 @@
     },
     "SearchBar": {
         "placeholder": "Eheka peteĩ artíkulo..."
+    },
+    "404" : {
+
+        "title" : "Página ndojejuhúi"
     }
 }
