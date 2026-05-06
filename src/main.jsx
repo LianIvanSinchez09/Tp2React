@@ -8,7 +8,7 @@ import { Detalles } from "./pages/Detalles/Detalles.jsx";
 import "./i18n.js";
 import SobreNosotros from "./pages/SobreNosotros/SobreNosotros.jsx";
 import Favoritos from "./pages/Favoritos/Favoritos.jsx";
-import NotFound from "./Components/NotFound/NotFound.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 
 const router = createBrowserRouter([
