@@ -19,7 +19,7 @@ const SearchBar = ({
             if (setScrollReset) {
                 setScrollReset(0);
             }
-        }, 700);
+        }, 300);
         return () => {
             clearTimeout(timer)
         };
