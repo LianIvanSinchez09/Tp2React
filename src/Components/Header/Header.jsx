@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import './Header.css'
@@ -14,7 +14,7 @@ export const Header = () => {
         {/* Logo */}
         <div className="font-bold text-purple-700 flex items-center drop-shadow">
           <NavLink to="/">
-            <img className="w-20" src="../logo.png" alt="Logo de IUPI" />
+            <img className="w-20" src="../logo.png" alt="Logo de IUPI" name="Logo de IUPI" />
           </NavLink>
         </div>
 
