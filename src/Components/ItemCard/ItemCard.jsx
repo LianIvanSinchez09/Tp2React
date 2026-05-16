@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./ItemCard.css";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Favorite } from "../Favorite/Favorite";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
-
-const ItemCard = ({
+export const ItemCard = ({
   name,
   avatar,
   description,
@@ -74,4 +73,3 @@ const ItemCard = ({
   );
 };
 
-export default ItemCard;
