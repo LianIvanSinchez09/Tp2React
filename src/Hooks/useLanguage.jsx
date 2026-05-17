@@ -6,12 +6,9 @@ const DEFAULT_LANGUAGE = "es";
 
 export const useLanguage = () => {
   const { i18n } = useTranslation();
-
   const [language, setLanguage] = useState(
     () => getLocalStorage("language") ?? DEFAULT_LANGUAGE
   );
-
-  // On mount: apply whatever language is stored (handles page refresh / re-render)
   useEffect(() => {
     const stored = getLocalStorage("language") ?? DEFAULT_LANGUAGE;
     if (i18n.language !== stored) {

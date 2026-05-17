@@ -39,8 +39,6 @@ const SNCard = ({
           style={{ background: accentColor, opacity: 0.2 }}
         />
       </div>
-
-      {/* Question */}
       <h2
         className="font-bold text-xl mb-3"
         style={{ fontFamily: "'Playfair Display', serif", color: "#2d1a5c" }}

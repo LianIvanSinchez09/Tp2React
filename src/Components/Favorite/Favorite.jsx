@@ -4,12 +4,12 @@ export const Favorite = ({ handleFavorite, isFavorite }) => {
     
 
   return (
-    <div onClick={handleFavorite}>
+    <button onClick={handleFavorite}>
       {isFavorite ? (
         <img className="w-7" src="/icons/favorite2.svg" alt="Favorito" />
       ) : (
         <img className="w-7" src="/icons/favorite.svg" alt="No favorito" />
       )}
-    </div>
+    </button>
   );
 };
