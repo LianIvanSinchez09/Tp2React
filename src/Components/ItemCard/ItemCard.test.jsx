@@ -10,11 +10,17 @@ beforeEach(() => {
   i18n.changeLanguage("es");
 });
 
+let mockImg = []
+
+beforeAll(async () => {
+  mockImg = await getProducts("", 1, 1)[0]?.avatar;
+});
+
 // Producto de ejemplo reutilizable en tests
 const mockProduct = {
   id: "1",
   name: "Oriental Marble Towels",
-  avatar: "https://via.placeholder.com/150",
+  avatar: mockImg,
   description: "A nice towel",
   price: 29.99,
   stock: 10,
