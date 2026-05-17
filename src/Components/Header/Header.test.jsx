@@ -30,7 +30,6 @@ describe("Header", () => {
   });
 
   it("Correcto funcionamiento de los estilos", ()=>{
-    const user = userEvent.setup();
     render(
       <MemoryRouter>
         <Header />
