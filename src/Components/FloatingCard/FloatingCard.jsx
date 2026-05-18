@@ -5,6 +5,7 @@ import './FloatingCard.css'
 const FloatingCard = ({ product, position }) => {
   return (
     <div
+    role="contenedor"
     key={product.id}
     className={`
         ${position}
