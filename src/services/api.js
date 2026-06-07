@@ -1,3 +1,4 @@
+//mock vieja: https://69f018fd112e1b968e252e01.mockapi.io/api/v1/Productos
 export const url = "http://localhost:3000/api/productos";
 
 
