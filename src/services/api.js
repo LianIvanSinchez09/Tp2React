@@ -1,4 +1,5 @@
-export const url = "https://69f018fd112e1b968e252e01.mockapi.io/api/v1/Productos";
+//mock vieja: https://69f018fd112e1b968e252e01.mockapi.io/api/v1/Productos
+export const url = "http://localhost:3000/api/productos";
 
 
 export async function getProducts(searchQuery = "", page = 1, limit) {
@@ -33,7 +34,9 @@ export async function getProducts(searchQuery = "", page = 1, limit) {
 }
 
 export async function getDetails(id) {
-  const response = await fetch(url);
+  const fetchUrl = id ? `${url}/${id}` : url;
+
+  const response = await fetch(fetchUrl);
 
   if (!response.ok) {
     throw new Error(`Error de HTTP: ${response.status}`);
@@ -41,10 +44,5 @@ export async function getDetails(id) {
 
   const data = await response.json(); 
 
-  if (id) {
-    return data.filter((item) => item.id === id); 
-  }
-
   return data;
 }
-

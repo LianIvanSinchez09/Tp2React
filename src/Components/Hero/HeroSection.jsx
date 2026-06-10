@@ -1,30 +1,34 @@
+import React, { useState, useEffect } from "react";
 import { getProducts } from "../../services/api";
 import FloatingCard from "../FloatingCard/FloatingCard";
 import { useTranslation } from "react-i18next";
 
-const products = await getProducts("", 1, 50)
-
-let productList = []
-let indexNew = 4
-
-const RandomProductList = (products, indexNew) => {
-  for (let index = 0; index < indexNew; index++) {
-    let randomProd = products[Math.floor(Math.random() * products.length)]
-    if(!productList.includes(randomProd) && productList.length < 4){
-      productList.push(randomProd)
-    }else{
-      if(productList.length < 4){
-        indexNew = indexNew < 1 ? indexNew : indexNew - index
-        RandomProductList(products, indexNew)
-      }
-    }    
-  }
-}
-
-RandomProductList(products, indexNew) 
-
 export default function HeroSection({ handleScroll }) {
   const { t } = useTranslation();
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() => {
+    const fetchRandomProducts = async () => {
+      try {
+        const products = await getProducts("", 1, 50);
+        
+        let randomList = [];
+        let tempProducts = [...products]; 
+        
+        for (let i = 0; i < 4 && tempProducts.length > 0; i++) {
+          const randomIndex = Math.floor(Math.random() * tempProducts.length);
+          randomList.push(tempProducts[randomIndex]);
+          tempProducts.splice(randomIndex, 1); 
+        }
+        
+        setProductList(randomList);
+      } catch (error) {
+        console.error("Error al cargar productos para el Hero:", error);
+      }
+    };
+
+    fetchRandomProducts();
+  }, []); 
 
   return (
     <section
@@ -47,11 +51,16 @@ export default function HeroSection({ handleScroll }) {
         style={{ background: "rgba(160, 200, 255, 0.3)" }}
       />
 
-      <div className=" pointer-events-none z-5 hidden md:block">
-        <FloatingCard product={productList[0]} position={"top-[18%] left-[5%]"}  />
-        <FloatingCard product={productList[1]} position={"bottom-[22%] left-[8%]"}  />
-        <FloatingCard product={productList[2]} position={"top-[22%] right-[5%]"}  />
-        <FloatingCard product={productList[3]} position={"bottom-[18%] right-[7%]"}  />
+      <div className="pointer-events-none z-5 hidden md:block">
+        {/* Solo renderizamos las cards si productList ya tiene los 4 productos */}
+        {productList.length === 4 && (
+          <>
+            <FloatingCard product={productList[0]} position={"top-[18%] left-[5%]"}  />
+            <FloatingCard product={productList[1]} position={"bottom-[22%] left-[8%]"}  />
+            <FloatingCard product={productList[2]} position={"top-[22%] right-[5%]"}  />
+            <FloatingCard product={productList[3]} position={"bottom-[18%] right-[7%]"}  />
+          </>
+        )}
       </div>
 
       <div className="relative z-10 text-center max-w-3xl px-6">
