@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ItemCard.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Favorite } from "../Favorite/Favorite";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 
@@ -24,7 +24,7 @@ export const ItemCard = ({
   };
   //Seccion para favoritos
   const [isFavorite, setIsFavorite] = useState(-1); // valor inicial
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchFavorite = async () => {
       const userId = getLocalStorage("logeado");
@@ -36,13 +36,16 @@ export const ItemCard = ({
   }, [id]);
 
   const handleFavorite = () => {
-    console.log(isFavorite);
-    if (isFavorite < 0) {
-      setFavorite(getLocalStorage("logeado"), id);
-      setIsFavorite(id);
+    if (getLocalStorage("logeado") === -1) {
+      navigate("/login");
     } else {
-      deleteFavorite(getLocalStorage("logeado"), id);
-      setIsFavorite(-1);
+      if (isFavorite < 0) {
+        setFavorite(getLocalStorage("logeado"), id);
+        setIsFavorite(id);
+      } else {
+        deleteFavorite(getLocalStorage("logeado"), id);
+        setIsFavorite(-1);
+      }
     }
   };
 

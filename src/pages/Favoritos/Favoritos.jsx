@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { Header } from "../../Components/Header/Header";
 import { useLanguage } from "../../Hooks/useLanguage";
+import { getFavoriteTodos } from "../../services/api";
 
 const Favorites = () => {
   const { t } = useTranslation();
@@ -16,15 +17,20 @@ const Favorites = () => {
   useLanguage();
 
   useEffect(() => {
-    setFavorites(getLocalStorage("favorites"));
-  }, []);
+    const fetchFavorites = async () => {
+      const userId = getLocalStorage("logeado");
+      const favoritos = await getFavoriteTodos(userId);
+      setFavorites(favoritos);
+    };
 
+    fetchFavorites();
+  }, [favorites]);
   useEffect(() => {
     if (searchQuery.length > 0) {
       setfavoritesSearch(
         favorites.filter((item) =>
-          item.name?.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+          item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
+        ),
       );
     } else {
       setfavoritesSearch(favorites);

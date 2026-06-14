@@ -18,25 +18,9 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const targetRef = useRef(null);
   const [favorites, setFavorites] = useState([]);
-  if (!getLocalStorage("favorites")) {
-    setLocalStorage("favorites", []);
-  }
   if (!getLocalStorage("logeado")) {
     setLocalStorage("logeado", -1);
   }
-  //Verificacion de que hayan productos
-  const checkProductos = async () => {
-    setLocalStorage("checkerProductos", false);
-
-    const productos = await getProducts("", 1, 1); // acá esperás la promesa
-
-    if (productos.length > 0) {
-      setLocalStorage("checkerProductos", true);
-    }
-  };
-  useEffect(() => {
-    checkProductos();
-  }, []);
 
   useLanguage();
 

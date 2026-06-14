@@ -3,6 +3,15 @@ export const url = "http://localhost:3000/api/productos";
 export const urlLogin = "http://localhost:3000/api/auth/login";
 export const urlFavorite = `http://localhost:3000/api/favoritos`;
 
+export async function getFavoriteTodos(idUsuario) {
+  const urlfavorite = `http://localhost:3000/api/favoritos/${idUsuario}`;
+  const response = await fetch(urlfavorite);
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data ?? null;
+}
 export async function getFavoriteId(idUsuario, idProducto) {
   const urlfavorite = `http://localhost:3000/api/favoritos/checker/${idUsuario}/${idProducto}`;
   const response = await fetch(urlfavorite);
