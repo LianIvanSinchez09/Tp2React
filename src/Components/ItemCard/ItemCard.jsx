@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ItemCard.css";
 import { Link } from "react-router-dom";
 import { Favorite } from "../Favorite/Favorite";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
+
+import { deleteFavorite, getFavoriteId, setFavorite } from "../../services/api";
 export const ItemCard = ({
   name,
   avatar,
@@ -18,27 +20,29 @@ export const ItemCard = ({
     description: description,
     price: price,
     stock: stock,
-    id: id
+    id: id,
   };
   //Seccion para favoritos
-  const [isFavorite, setIsFavorite] = useState(() => {
-    const arrayLocal = getLocalStorage("favorites") || [];
-    return arrayLocal.some((fav) => fav.id === props.id);
-  });
+  const [isFavorite, setIsFavorite] = useState(-1); // valor inicial
+
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      const userId = getLocalStorage("logeado");
+      const resultado = await getFavoriteId(userId, id);
+      setIsFavorite(resultado); // actualiza el estado con el id
+    };
+
+    fetchFavorite();
+  }, [id]);
+
   const handleFavorite = () => {
-    const arrayLocal = getLocalStorage("favorites") || [];
-    if (arrayLocal) {
-      if (isFavorite) {
-        const newArray = arrayLocal.filter((fav) => fav.id !== props.id);
-        setFavorites(newArray);
-        setLocalStorage("favorites", newArray);
-        setIsFavorite(false);
-      } else {
-        arrayLocal.push(props);
-        setLocalStorage("favorites", arrayLocal);
-        setFavorites(arrayLocal);
-        setIsFavorite(true);
-      }
+    console.log(isFavorite);
+    if (isFavorite < 0) {
+      setFavorite(getLocalStorage("logeado"), id);
+      setIsFavorite(id);
+    } else {
+      deleteFavorite(getLocalStorage("logeado"), id);
+      setIsFavorite(-1);
     }
   };
 
@@ -72,4 +76,3 @@ export const ItemCard = ({
     </div>
   );
 };
-

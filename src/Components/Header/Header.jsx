@@ -7,7 +7,7 @@ import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 
 export const Header = () => {
   const { t, i18n } = useTranslation();
-  const [logeado, setLogeado] = useState(getLocalStorage("logeado") || false);
+  const [logeado, setLogeado] = useState(getLocalStorage("logeado") || -1);
 
   useEffect(() => {
     setLocalStorage("logeado", logeado);
@@ -40,7 +40,7 @@ export const Header = () => {
 
         <div className="ml-4 flex">
           <NavLink to="/login" className="navlink navlinkCustom">
-            {!logeado ? (
+            {logeado === -1 ? (
               <img
                 className="w-[40px] h-auto"
                 src="/icons/login.svg"

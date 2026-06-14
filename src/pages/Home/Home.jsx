@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Footer } from "../../Components/Footer/Footer";
 import ItemLoader from "../../Components/ItemLoader/ItemLoader";
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -6,10 +6,12 @@ import { useTranslation } from "react-i18next";
 import { Header } from "../../Components/Header/Header";
 import HeroSection from "../../Components/Hero/HeroSection";
 import { useLanguage } from "../../Hooks/useLanguage.jsx";
+
 import {
   getLocalStorage,
   setLocalStorage,
 } from "../../services/localStorage.js";
+import { getProducts } from "../../services/api.js";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -20,8 +22,21 @@ const Home = () => {
     setLocalStorage("favorites", []);
   }
   if (!getLocalStorage("logeado")) {
-    setLocalStorage("logeado", false);
+    setLocalStorage("logeado", -1);
   }
+  //Verificacion de que hayan productos
+  const checkProductos = async () => {
+    setLocalStorage("checkerProductos", false);
+
+    const productos = await getProducts("", 1, 1); // acá esperás la promesa
+
+    if (productos.length > 0) {
+      setLocalStorage("checkerProductos", true);
+    }
+  };
+  useEffect(() => {
+    checkProductos();
+  }, []);
 
   useLanguage();
 

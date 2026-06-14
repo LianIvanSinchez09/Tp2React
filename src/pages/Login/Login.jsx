@@ -10,11 +10,11 @@ const Login = () => {
   const [mensaje, setMensaje] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [logeado, setLogeado] = useState(getLocalStorage("logeado") || false);
+  const [logeado, setLogeado] = useState(getLocalStorage("logeado") || -1);
 
   const handleLogout = () => {
-    setLocalStorage("logeado", false);
-    setLogeado(false);
+    setLocalStorage("logeado", -1);
+    setLogeado(-1);
     navigate("/");
   };
 
@@ -24,9 +24,9 @@ const Login = () => {
     let password = e.target.password.value;
     const resultado = await verificarLogin(email, password);
 
-    if (resultado === true) {
+    if (resultado > 0) {
       setMensaje("Correcto");
-      setLocalStorage("logeado", true);
+      setLocalStorage("logeado", resultado);
 
       navigate("/");
     } else {
@@ -39,7 +39,7 @@ const Login = () => {
 
       <main className="flex flex-1 items-center justify-center mt-20">
         <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-md border border-pink-100">
-          {!logeado ? (
+          {logeado === -1 ? (
             <>
               <h2 className="text-2xl font-bold text-pink-400 mb-6 text-center">
                 {t("login.title", "Iniciar sesión")}
