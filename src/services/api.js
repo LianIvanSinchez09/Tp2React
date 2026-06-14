@@ -1,9 +1,22 @@
 //mock vieja: https://69f018fd112e1b968e252e01.mockapi.io/api/v1/Productos
 export const url = "http://localhost:3000/api/productos";
+export const urlLogin = "http://localhost:3000/api/auth/login";
 
+export async function verificarLogin(email, password) {
+  const fetchUrl = new URL(urlLogin);
+  const response = await fetch(fetchUrl, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  let data = true;
+  if (!response.ok) {
+    data = false;
+  }
 
+  return data;
+}
 export async function getProducts(searchQuery = "", page = 1, limit) {
-  
   const fetchUrl = new URL(url);
 
   fetchUrl.searchParams.append("page", page);
@@ -12,13 +25,13 @@ export async function getProducts(searchQuery = "", page = 1, limit) {
   // Si hay una búsqueda, le agregamos el filtro de MockAPI a la URL
   //la searchQuery va a ser por el nombre del producto
   if (searchQuery) {
-    fetchUrl.searchParams.append("name", searchQuery); 
+    fetchUrl.searchParams.append("name", searchQuery);
   }
 
   //aca se une todo automáticamente (ej: https://.../Productos?page=1&limit=6&name=muñeca)
   const response = await fetch(fetchUrl.toString(), {
-    method: 'GET',
-    headers: {'content-type':'application/json'}
+    method: "GET",
+    headers: { "content-type": "application/json" },
   });
 
   // Si MockAPI no encuentra coincidencias o se pasa de página, devuelve string vacio
@@ -42,7 +55,7 @@ export async function getDetails(id) {
     throw new Error(`Error de HTTP: ${response.status}`);
   }
 
-  const data = await response.json(); 
+  const data = await response.json();
 
   return data;
 }

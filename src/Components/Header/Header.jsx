@@ -3,14 +3,18 @@ import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import "./Header.css";
 import { useTranslation } from "react-i18next";
+import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 
 export const Header = () => {
   const { t, i18n } = useTranslation();
+  const [logeado, setLogeado] = useState(getLocalStorage("logeado") || false);
 
+  useEffect(() => {
+    setLocalStorage("logeado", logeado);
+  }, [logeado]);
   return (
     <header className="fixed w-screen z-20 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 shadow-[0_0_20px_rgba(0,0,0,0.15)] border-b-4 border-dashed border-white">
       <div className=" mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <div className="font-bold text-purple-700 flex items-center drop-shadow">
           <NavLink to="/">
             <img
@@ -22,7 +26,6 @@ export const Header = () => {
           </NavLink>
         </div>
 
-        {/* Navegación */}
         <nav className="flex gap-6 font-medium text-2xl">
           <NavLink className={"navlink navlinkCustom"} to="/">
             {t("header.inicio")}
@@ -36,9 +39,22 @@ export const Header = () => {
         </nav>
 
         <div className="ml-4 flex">
-          <NavLink to="/login" className={"navlink navlinkCustom"}>
-            <img className="w-[40px] h-auto" src="/icons/login.svg" alt="" />
+          <NavLink to="/login" className="navlink navlinkCustom">
+            {!logeado ? (
+              <img
+                className="w-[40px] h-auto"
+                src="/icons/login.svg"
+                alt="Login"
+              />
+            ) : (
+              <img
+                className="w-[40px] h-auto"
+                src="/icons/logout.svg"
+                alt="Logout"
+              />
+            )}
           </NavLink>
+
           <LanguageSwitcher />
         </div>
       </div>
