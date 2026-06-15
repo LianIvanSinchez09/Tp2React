@@ -18,18 +18,23 @@ const Login = () => {
     navigate("/");
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     let email = e.target.email.value;
     let password = e.target.password.value;
-    const resultado = await verificarLogin(email, password);
+    
+    try {
+      const resultado = await verificarLogin(email, password);
 
-    if (resultado > 0) {
-      setMensaje("Correcto");
-      setLocalStorage("logeado", resultado);
+      if (resultado > 0) {
+        setMensaje("Correcto");
+        setLocalStorage("logeado", resultado);
+        navigate("/");
+      } else {
+        setMensaje("Datos incorrectos");
+      }
+    } catch (error) {
 
-      navigate("/");
-    } else {
       setMensaje("Datos incorrectos");
     }
   };

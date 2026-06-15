@@ -102,7 +102,11 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
         {products.length > 0
           ? products.map((item) => (
               <div key={item.id}>
-                <ItemCard {...item} setFavorites={setFavorites} />
+                <ItemCard 
+                  {...item} 
+                  setFavorites={setFavorites} 
+                  isAlreadyFavorite={!!favorites} 
+                />
               </div>
             ))
           : !loading && <ErrorComponent message={searchQuery} />}

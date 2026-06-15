@@ -24,7 +24,8 @@ const Favorites = () => {
     };
 
     fetchFavorites();
-  }, [favorites]);
+  }, []);
+  
   useEffect(() => {
     if (searchQuery.length > 0) {
       setfavoritesSearch(

@@ -13,29 +13,28 @@ export const ItemCard = ({
   stock,
   id,
   setFavorites,
+  isAlreadyFavorite 
 }) => {
-  const props = {
-    name: name,
-    avatar: avatar,
-    description: description,
-    price: price,
-    stock: stock,
-    id: id,
-  };
-  //Seccion para favoritos
-  const [isFavorite, setIsFavorite] = useState(-1); // valor inicial
+  const props = { name, avatar, description, price, stock, id };
+  
+  const [isFavorite, setIsFavorite] = useState(isAlreadyFavorite ? id : -1); 
   const navigate = useNavigate();
+
   useEffect(() => {
-    const fetchFavorite = async () => {
-      const userId = getLocalStorage("logeado");
-      const resultado = await getFavoriteId(userId, id);
-      setIsFavorite(resultado); // actualiza el estado con el id
-    };
+    if (!isAlreadyFavorite) {
+      const fetchFavorite = async () => {
+        const userId = getLocalStorage("logeado");
+        if (userId !== -1) {
+          const resultado = await getFavoriteId(userId, id);
+          setIsFavorite(resultado);
+        }
+      };
 
-    fetchFavorite();
-  }, [id]);
+      fetchFavorite();
+    }
+  }, [id, isAlreadyFavorite]);
 
-  const handleFavorite = () => {
+const handleFavorite = () => {
     if (getLocalStorage("logeado") === -1) {
       navigate("/login");
     } else {
@@ -45,10 +44,12 @@ export const ItemCard = ({
       } else {
         deleteFavorite(getLocalStorage("logeado"), id);
         setIsFavorite(-1);
+        if (typeof setFavorites === "function") {
+          setFavorites((prev) => prev.filter((item) => item.id !== id));
+        }
       }
     }
   };
-
   return (
     <div className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:shadow-2xl">
       <Link to={`/detalles/${props.id}`}>
