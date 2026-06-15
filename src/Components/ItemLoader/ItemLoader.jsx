@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { getProducts } from '../../services/api.js';
-import { ItemCard } from '../ItemCard/ItemCard.jsx';
-import Spinner from '../Spinner/Spinner.jsx';
-import ErrorComponent from '../Error/ErrorComponent.jsx';
+import React, { useEffect, useState, useRef } from "react";
+import { getProducts } from "../../services/api.js";
+import { ItemCard } from "../ItemCard/ItemCard.jsx";
+import Spinner from "../Spinner/Spinner.jsx";
+import ErrorComponent from "../Error/ErrorComponent.jsx";
 import { getLocalStorage } from "../../services/localStorage";
 
 const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
@@ -12,10 +12,6 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const cantProductos = 6;
-
-  console.log(getLocalStorage("favorites"));
-  
-
 
   // Referencia al div que estará al final de la lista
   const loaderRef = useRef(null);
@@ -31,19 +27,19 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    if(favorites){
+    if (favorites) {
       setProducts(favorites);
       setHasMore(false);
       setLoading(false);
       return;
     }
-      getProducts(searchQuery, page, cantProductos)
-      .then(data => {
+    getProducts(searchQuery, page, cantProductos)
+      .then((data) => {
         if (Array.isArray(data)) {
           if (page === 1) {
             setProducts(data);
           } else {
-            setProducts(prevProducts => [...prevProducts, ...data]);
+            setProducts((prevProducts) => [...prevProducts, ...data]);
           }
           if (data.length < cantProductos) {
             setHasMore(false);
@@ -54,25 +50,27 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
         }
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoading(false);
-      })
-    
+      });
   }, [searchQuery, page, favorites]);
 
   // Effect para el intersection observer (scroll infinito)
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const target = entries[0];
-      // Si el div es visible, hay más elementos, y no está cargando actualmente: sumamos una página
-      if (target.isIntersecting && hasMore && !loading) {
-        setPage(prevPage => prevPage + 1);
-      }
-    }, {
-      // rootMargin hace que detecte el div 100px antes de llegar
-      rootMargin: "100px" 
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const target = entries[0];
+        // Si el div es visible, hay más elementos, y no está cargando actualmente: sumamos una página
+        if (target.isIntersecting && hasMore && !loading) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      },
+      {
+        // rootMargin hace que detecte el div 100px antes de llegar
+        rootMargin: "100px",
+      },
+    );
 
     const currentLoader = loaderRef.current;
     if (currentLoader) {
@@ -88,35 +86,39 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
 
   // Solo mostramos el "Cargando" global en la primera página
   if (loading && page === 1) {
-    return( 
+    return (
       <div className="flex flex-col justify-center items-center w-full">
-        <Spinner/>
+        <Spinner />
       </div>
-    )
+    );
   }
 
   if (error) {
-    return <ErrorComponent message={error} type="error" />
+    return <ErrorComponent message={error} type="error" />;
   }
   return (
     <div className="flex flex-col items-center w-full">
-      <div className='grid place-items-center grid-cols-1 md:grid-cols-3 gap-4 m-4 w-full'>
+      <div className="grid place-items-center grid-cols-1 md:grid-cols-3 gap-4 m-4 w-full">
         {products.length > 0
           ? products.map((item) => (
-            <div key={item.id}>
-              <ItemCard {...item} setFavorites={setFavorites} />
-            </div>
-          ))
-          : !loading && (
-            <ErrorComponent message={searchQuery}/>
-          )
-        }
+              <div key={item.id}>
+                <ItemCard 
+                  {...item} 
+                  setFavorites={setFavorites} 
+                  isAlreadyFavorite={!!favorites} 
+                />
+              </div>
+            ))
+          : !loading && <ErrorComponent message={searchQuery} />}
       </div>
 
       {/*este es el elemento que el observer está vigilando. */}
       {hasMore && (
-        <div ref={loaderRef} className="h-10 w-full flex justify-center items-center my-4">
-          {loading && page > 1 && <Spinner/>}
+        <div
+          ref={loaderRef}
+          className="h-10 w-full flex justify-center items-center my-4"
+        >
+          {loading && page > 1 && <Spinner />}
         </div>
       )}
     </div>

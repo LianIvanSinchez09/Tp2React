@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ItemCard.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Favorite } from "../Favorite/Favorite";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
+
+import { deleteFavorite, getFavoriteId, setFavorite } from "../../services/api";
 export const ItemCard = ({
   name,
   avatar,
@@ -11,37 +13,43 @@ export const ItemCard = ({
   stock,
   id,
   setFavorites,
+  isAlreadyFavorite 
 }) => {
-  const props = {
-    name: name,
-    avatar: avatar,
-    description: description,
-    price: price,
-    stock: stock,
-    id: id
-  };
-  //Seccion para favoritos
-  const [isFavorite, setIsFavorite] = useState(() => {
-    const arrayLocal = getLocalStorage("favorites") || [];
-    return arrayLocal.some((fav) => fav.id === props.id);
-  });
-  const handleFavorite = () => {
-    const arrayLocal = getLocalStorage("favorites") || [];
-    if (arrayLocal) {
-      if (isFavorite) {
-        const newArray = arrayLocal.filter((fav) => fav.id !== props.id);
-        setFavorites(newArray);
-        setLocalStorage("favorites", newArray);
-        setIsFavorite(false);
+  const props = { name, avatar, description, price, stock, id };
+  
+  const [isFavorite, setIsFavorite] = useState(isAlreadyFavorite ? id : -1); 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAlreadyFavorite) {
+      const fetchFavorite = async () => {
+        const userId = getLocalStorage("logeado");
+        if (userId !== -1) {
+          const resultado = await getFavoriteId(userId, id);
+          setIsFavorite(resultado);
+        }
+      };
+
+      fetchFavorite();
+    }
+  }, [id, isAlreadyFavorite]);
+
+const handleFavorite = () => {
+    if (getLocalStorage("logeado") === -1) {
+      navigate("/login");
+    } else {
+      if (isFavorite < 0) {
+        setFavorite(getLocalStorage("logeado"), id);
+        setIsFavorite(id);
       } else {
-        arrayLocal.push(props);
-        setLocalStorage("favorites", arrayLocal);
-        setFavorites(arrayLocal);
-        setIsFavorite(true);
+        deleteFavorite(getLocalStorage("logeado"), id);
+        setIsFavorite(-1);
+        if (typeof setFavorites === "function") {
+          setFavorites((prev) => prev.filter((item) => item.id !== id));
+        }
       }
     }
   };
-
   return (
     <div className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:shadow-2xl">
       <Link to={`/detalles/${props.id}`}>
@@ -72,4 +80,3 @@ export const ItemCard = ({
     </div>
   );
 };
-
