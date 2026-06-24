@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:3000";
-// const BASE_URL = "https://tp4-react.vercel.app";
+//const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://tp4-react.vercel.app";
 export const url = `${BASE_URL}/api/productos`;
 export const urlLogin = `${BASE_URL}/api/auth/login`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
