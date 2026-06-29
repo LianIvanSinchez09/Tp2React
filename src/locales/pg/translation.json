@@ -46,5 +46,33 @@
     "404" : {
 
         "title" : "Página ndojejuhúi"
+    },
+    "login": {
+    "title": "Eike",
+    "email": "Email",
+    "password": "Ñe'ẽñemi",
+    "submit": "Eike",
+    "noAccount": "Ndereikéi guaviyréma?",
+    "register": "Eñemboheraguapy"
+    },
+    "logout": {
+        "title": "Ese",
+        "message": "Reipota resẽ ne cuenta-gui?",
+        "submit": "Ese"
+    },
+    "register": {
+        "title": "Eñemboheraguapy",
+        "email": "Email",
+        "password": "Ñe'ẽñemi",
+        "confirmPassword": "Embojerure ñe'ẽñemi",
+        "placeholderEmail": "ndemail@ejemplo.com",
+        "placeholderPassword": "5 ha 15 punterogui",
+        "placeholderConfirm": "Embojere nde ñe'ẽñemi",
+        "submit": "Eñemboheraguapy →",
+        "hasAccount": "Nde cuenta reikóma?",
+        "login": "Eike",
+        "errorEmail": "Email ndoikóiva",
+        "errorPassword": "Ñe'ẽñemi oñeikotevẽ 5 ha 15 punterogui",
+        "errorConfirm": "Ñe'ẽñemi ndojokupytýi"
     }
 }
