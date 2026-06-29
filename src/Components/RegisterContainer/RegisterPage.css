@@ -1,0 +1,284 @@
+/* RegisterPage.css */
+
+/* ── Background ── */
+.register-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: linear-gradient(135deg, #f9c8e8 0%, #e8d5f5 35%, #c8d8f8 70%, #b8c8f0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Decorative squares (like IUPI hero) ── */
+.register-bg::before,
+.register-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 18px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.register-bg::before {
+  width: 340px;
+  height: 280px;
+  background: rgba(180, 150, 230, 0.45);
+  top: 6%;
+  right: 5%;
+  transform: rotate(8deg);
+}
+
+.register-bg::after {
+  width: 260px;
+  height: 220px;
+  background: rgba(160, 190, 240, 0.45);
+  bottom: 8%;
+  left: 4%;
+  transform: rotate(-6deg);
+}
+
+.register-square {
+  position: absolute;
+  border-radius: 18px;
+  pointer-events: none;
+  opacity: 0.28;
+}
+
+.register-square--a {
+  width: 180px;
+  height: 160px;
+  background: rgba(200, 160, 235, 0.5);
+  top: 55%;
+  right: 8%;
+  transform: rotate(12deg);
+}
+
+.register-square--b {
+  width: 140px;
+  height: 120px;
+  background: rgba(170, 200, 245, 0.5);
+  top: 10%;
+  left: 6%;
+  transform: rotate(-10deg);
+}
+
+/* ── Success screen ── */
+.register-success {
+  background: white;
+  border-radius: 24px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(120, 80, 180, 0.15);
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.register-success__emoji {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.register-success__title {
+  color: #2d1b69;
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.register-success__subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0 0 24px;
+}
+
+/* ── Card ── */
+.register-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 12px 50px rgba(120, 80, 180, 0.18);
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Header ── */
+.register-header {
+  margin-bottom: 28px;
+}
+
+.register-header__title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 6px;
+  letter-spacing: -0.5px;
+}
+
+.register-header__underline {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #818cf8);
+  border-radius: 99px;
+}
+
+/* ── Form rows ── */
+.register-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.register-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Labels ── */
+.register-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ── Inputs & selects ── */
+.register-input,
+.register-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  background: #f9fafb;
+  color: #1f2937;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.register-input:focus,
+.register-select:focus {
+  border-color: #7c3aed;
+}
+
+.register-input--error {
+  border-color: #ef4444;
+}
+
+.register-select--placeholder {
+  color: #9ca3af;
+}
+
+/* ── Error message ── */
+.register-error {
+  font-size: 11px;
+  color: #ef4444;
+  margin: 3px 0 0;
+}
+
+/* ── Gender row ── */
+.register-gender-group {
+  margin-bottom: 24px;
+}
+
+.register-gender-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.register-gender-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #4b5563;
+  cursor: pointer;
+  accent-color: #7c3aed;
+}
+
+.register-gender-option input {
+  accent-color: #7c3aed;
+}
+
+/* ── Buttons ── */
+.register-btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+  color: white;
+  border: none;
+  border-radius: 99px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  transition: opacity 0.2s;
+  font-family: inherit;
+}
+
+.register-btn-submit:hover {
+  opacity: 0.9;
+}
+
+.register-btn-back {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 99px;
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.register-btn-back:hover {
+  opacity: 0.9;
+}
+
+/* ── Footer link ── */
+.register-footer {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.register-footer a {
+  color: #7c3aed;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 540px) {
+  .register-card {
+    padding: 28px 20px;
+  }
+
+  .register-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,7 +1,9 @@
 //const BASE_URL = "http://localhost:3000";
-const BASE_URL = "https://tp4-react.vercel.app";
+
+const BASE_URL = "http://localhost:3000";
 export const url = `${BASE_URL}/api/productos`;
 export const urlLogin = `${BASE_URL}/api/auth/login`;
+export const urlRegister = `${BASE_URL}/api/auth/register`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
 
 export async function getFavoriteTodos(idUsuario) {
@@ -12,6 +14,27 @@ export async function getFavoriteTodos(idUsuario) {
   }
   const data = await response.json();
   return data ?? null;
+}
+
+export async function registerUser(email, password) {
+  const fetchUrl = new URL(urlRegister); 
+  const response = await fetch(fetchUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (response.status === 400) {
+    throw new Error("El email ya está registrado");
+  }
+
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+
+  const data = await response.json();
+  // { id, email, accessToken }
+  return data;
 }
 
 export async function getFavoriteId(idUsuario, idProducto) {
@@ -68,6 +91,7 @@ export async function verificarLogin(email, password) {
   }
 
   const data = await response.json();
+  console.log(data)
   return data.id ?? -1;
 }
 

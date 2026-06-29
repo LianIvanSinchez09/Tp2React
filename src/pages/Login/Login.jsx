@@ -34,7 +34,6 @@ const handleSubmit = async (e) => {
         setMensaje("Datos incorrectos");
       }
     } catch (error) {
-
       setMensaje("Datos incorrectos");
     }
   };
@@ -77,7 +76,7 @@ const handleSubmit = async (e) => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 
+                  className="w-full bg-linear-to-r from-pink-100 via-purple-100 to-blue-100 
         shadow-[0_0_15px_rgba(0,0,0,0.1)] text-gray-700 py-2 rounded-lg 
         hover:from-pink-200 hover:via-purple-200 hover:to-blue-200 
         transition-colors font-semibold cursor-pointer"
@@ -97,7 +96,7 @@ const handleSubmit = async (e) => {
               </p>
               <button
                 onClick={handleLogout}
-                className="w-full bg-gradient-to-r from-red-100 via-pink-100 to-orange-100 
+                className="w-full bg-linear-to-r from-red-100 via-pink-100 to-orange-100 
       shadow-[0_0_15px_rgba(0,0,0,0.1)] text-gray-700 py-2 rounded-lg 
       hover:from-red-200 hover:via-pink-200 hover:to-orange-200 
       transition-colors font-semibold cursor-pointer"
