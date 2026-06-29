@@ -13,17 +13,18 @@ export const ItemCard = ({
   stock,
   id,
   setFavorites,
-  isAlreadyFavorite 
+  isAlreadyFavorite,
+  idUser,
 }) => {
   const props = { name, avatar, description, price, stock, id };
-  
-  const [isFavorite, setIsFavorite] = useState(isAlreadyFavorite ? id : -1); 
-  const navigate = useNavigate();
 
+  const [isFavorite, setIsFavorite] = useState(isAlreadyFavorite ? id : -1);
+
+  const navigate = useNavigate();
   useEffect(() => {
-    if (!isAlreadyFavorite) {
+    if (!isAlreadyFavorite && idUser !== null) {
       const fetchFavorite = async () => {
-        const userId = getLocalStorage("logeado");
+        const userId = idUser;
         if (userId !== -1) {
           const resultado = await getFavoriteId(userId, id);
           setIsFavorite(resultado);
@@ -32,17 +33,17 @@ export const ItemCard = ({
 
       fetchFavorite();
     }
-  }, [id, isAlreadyFavorite]);
+  }, [id, isAlreadyFavorite, idUser]);
 
-const handleFavorite = () => {
-    if (getLocalStorage("logeado") === -1) {
+  const handleFavorite = () => {
+    if (idUser === -1) {
       navigate("/login");
     } else {
       if (isFavorite < 0) {
-        setFavorite(getLocalStorage("logeado"), id);
+        setFavorite(idUser, id);
         setIsFavorite(id);
       } else {
-        deleteFavorite(getLocalStorage("logeado"), id);
+        deleteFavorite(idUser, id);
         setIsFavorite(-1);
         if (typeof setFavorites === "function") {
           setFavorites((prev) => prev.filter((item) => item.id !== id));

@@ -6,26 +6,45 @@ import { useTranslation } from "react-i18next";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
 import { Header } from "../../Components/Header/Header";
 import { useLanguage } from "../../Hooks/useLanguage";
-import { getFavoriteTodos } from "../../services/api";
+import { getFavoriteTodos, getIdUser } from "../../services/api";
 
 const Favorites = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [favoritesSearch, setfavoritesSearch] = useState([]);
+  const [idUser, setIdUser] = useState(null);
 
   useLanguage();
 
+  //Useeffect para conseguir el id
   useEffect(() => {
-    const fetchFavorites = async () => {
-      const userId = getLocalStorage("logeado");
-      const favoritos = await getFavoriteTodos(userId);
-      setFavorites(favoritos);
+    const token = getLocalStorage("logeado");
+
+    const fetchUserId = async () => {
+      try {
+        const id = await getIdUser(token);
+        setIdUser(id);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
-    fetchFavorites();
+    fetchUserId();
   }, []);
-  
+
+  useEffect(() => {
+    if (idUser) {
+      const fetchFavorites = async () => {
+        const userId = idUser;
+        const favoritos = await getFavoriteTodos(userId);
+        setFavorites(favoritos);
+      };
+
+      fetchFavorites();
+    }
+  }, [idUser]);
+
   useEffect(() => {
     if (searchQuery.length > 0) {
       setfavoritesSearch(
@@ -70,6 +89,7 @@ const Favorites = () => {
             favorites={favoritesSearch}
             setFavorites={setFavorites}
             searchQuery={searchQuery}
+            idUser={idUser}
           />
         ) : (
           <p className="text-center text-black m-10 text-2xl mt-10">
