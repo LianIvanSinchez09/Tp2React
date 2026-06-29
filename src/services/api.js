@@ -66,6 +66,7 @@ export async function setFavorite(accessToken, idProducto) {
   const response = await fetch(fetchUrl, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({ productId: idProducto }),
