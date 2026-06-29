@@ -4,6 +4,20 @@ export const url = `${BASE_URL}/api/productos`;
 export const urlLogin = `${BASE_URL}/api/auth/login`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
 
+export async function logout(accessToken) {
+  const urlId = `${BASE_URL}/api/auth/logout`;
+  const response = await fetch(urlId, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.message;
+}
 export async function getIdUser(accessToken) {
   const urlId = `${BASE_URL}/api/auth/me`;
   const response = await fetch(urlId, {
@@ -17,19 +31,29 @@ export async function getIdUser(accessToken) {
   const data = await response.json();
   return data.id;
 }
-export async function getFavoriteTodos(idUsuario) {
-  const urlfavorite = `${BASE_URL}/api/favoritos/${idUsuario}`;
-  const response = await fetch(urlfavorite);
+export async function getFavoriteTodos(accessToken) {
+  const urlfavorite = `${BASE_URL}/api/favoritos`;
+  const response = await fetch(urlfavorite, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (!response.ok) {
     throw new Error("Error en la petición");
   }
   const data = await response.json();
   return data ?? null;
 }
-
-export async function getFavoriteId(idUsuario, idProducto) {
-  const urlfavorite = `${BASE_URL}/api/favoritos/checker/${idUsuario}/${idProducto}`;
-  const response = await fetch(urlfavorite);
+//ACAAAA
+export async function getFavoriteId(accessToken, idProducto) {
+  const urlfavorite = `${BASE_URL}/api/favoritos/checker/${idProducto}`;
+  const response = await fetch(urlfavorite, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (!response.ok) {
     throw new Error("Error en la petición");
   }
@@ -37,14 +61,15 @@ export async function getFavoriteId(idUsuario, idProducto) {
   return data.id ?? -1;
 }
 
-export async function setFavorite(idUsuario, idProducto) {
+export async function setFavorite(accessToken, idProducto) {
   const fetchUrl = new URL(urlFavorite);
   const response = await fetch(fetchUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({ userId: idUsuario, productId: idProducto }),
+    body: JSON.stringify({ productId: idProducto }),
   });
   if (!response.ok) {
     throw new Error("Error en la petición");
@@ -53,14 +78,14 @@ export async function setFavorite(idUsuario, idProducto) {
   return data;
 }
 
-export async function deleteFavorite(idUsuario, idProducto) {
-  const fetchUrl = new URL(urlFavorite);
+export async function deleteFavorite(accessToken, idProducto) {
+  const fetchUrl = `${BASE_URL}/api/favoritos/${idProducto}`;
   const response = await fetch(fetchUrl, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({ userId: idUsuario, productId: idProducto }),
   });
   if (!response.ok) {
     throw new Error("Error en la petición");
