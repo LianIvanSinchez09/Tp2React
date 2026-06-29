@@ -4,6 +4,20 @@ export const url = `${BASE_URL}/api/productos`;
 export const urlLogin = `${BASE_URL}/api/auth/login`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
 
+export async function logout(accessToken) {
+  const urlId = `${BASE_URL}/api/auth/logout`;
+  const response = await fetch(urlId, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.message;
+}
 export async function getIdUser(accessToken) {
   const urlId = `${BASE_URL}/api/auth/me`;
   const response = await fetch(urlId, {
