@@ -1,11 +1,23 @@
-//const BASE_URL = "http://localhost:3000";
-
 const BASE_URL = "http://localhost:3000";
+//const BASE_URL = "https://tp4-react.vercel.app";
 export const url = `${BASE_URL}/api/productos`;
 export const urlLogin = `${BASE_URL}/api/auth/login`;
 export const urlRegister = `${BASE_URL}/api/auth/register`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
 
+export async function getIdUser(accessToken) {
+  const urlId = `${BASE_URL}/api/auth/me`;
+  const response = await fetch(urlId, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.id;
+}
 export async function getFavoriteTodos(idUsuario) {
   const urlfavorite = `${BASE_URL}/api/favoritos/${idUsuario}`;
   const response = await fetch(urlfavorite);
@@ -91,8 +103,7 @@ export async function verificarLogin(email, password) {
   }
 
   const data = await response.json();
-  console.log(data)
-  return data.id ?? -1;
+  return data.accessToken ?? -1;
 }
 
 export async function getProducts(searchQuery = "", page = 1, limit) {
