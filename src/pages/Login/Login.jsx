@@ -18,15 +18,15 @@ const Login = () => {
     navigate("/");
   };
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let email = e.target.email.value;
     let password = e.target.password.value;
-    
+
     try {
       const resultado = await verificarLogin(email, password);
 
-      if (resultado > 0) {
+      if (resultado) {
         setMensaje("Correcto");
         setLocalStorage("logeado", resultado);
         navigate("/");
@@ -34,7 +34,6 @@ const handleSubmit = async (e) => {
         setMensaje("Datos incorrectos");
       }
     } catch (error) {
-
       setMensaje("Datos incorrectos");
     }
   };
