@@ -1,4 +1,4 @@
-// const BASE_URL = "http://localhost:3000";
+//const BASE_URL = "http://localhost:3000";
 
 const BASE_URL = "https://tp4-react.vercel.app";
 export const url = `${BASE_URL}/api/productos`;
@@ -110,15 +110,19 @@ export async function setFavorite(accessToken, idProducto) {
   return data;
 }
 
-export async function deleteFavorite(idUsuario, idProducto) {
-  const fetchUrl = new URL(urlFavorite);
+export async function deleteFavorite(accessToken, idProducto) {
+
+  const fetchUrl = new URL(`${urlFavorite}/${idProducto}`); 
+  
   const response = await fetch(fetchUrl, {
     method: "DELETE",
     headers: {
+      "Authorization": `Bearer ${accessToken}`, 
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ userId: idUsuario, productId: idProducto }),
+   
   });
+
   if (!response.ok) {
     throw new Error("Error en la petición");
   }
