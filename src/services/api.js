@@ -20,8 +20,6 @@ export async function getIdUser(accessToken) {
   return data.id;
 }
 
-
-
 export async function getFavoriteTodos(idUsuario) {
   const urlfavorite = `${BASE_URL}/api/favoritos/${idUsuario}`;
   const response = await fetch(urlfavorite);
@@ -53,6 +51,21 @@ export async function registerUser(email, password) {
   console.log(data);
   
   return data;
+}
+
+export async function logout(accessToken) {
+  const urlId = `${BASE_URL}/api/auth/logout`;
+  const response = await fetch(urlId, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.message;
 }
 
 export async function getFavoriteId(idUsuario, idProducto) {
