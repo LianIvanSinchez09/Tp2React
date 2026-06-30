@@ -24,7 +24,6 @@ export const ItemCard = ({
   useEffect(() => {
     if (!isAlreadyFavorite && idUser !== null) {
       const fetchFavorite = async () => {
-
         const token = getLocalStorage("logeado");
 
         if (token !== -1) {
@@ -36,7 +35,6 @@ export const ItemCard = ({
       fetchFavorite();
     }
   }, [id, isAlreadyFavorite, idUser]);
-
   const handleFavorite = () => {
     if (idUser === -1) {
       navigate("/login");

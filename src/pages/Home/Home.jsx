@@ -16,7 +16,7 @@ import { getIdUser, getProducts } from "../../services/api.js";
 const Home = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [idUser, setIdUser] = useState(null);
+  const [idUser, setIdUser] = useState(getLocalStorage("logeado"));
   const targetRef = useRef(null);
   const [favorites, setFavorites] = useState([]);
   if (!getLocalStorage("logeado")) {
@@ -25,7 +25,7 @@ const Home = () => {
 
   useLanguage();
 
-  //Useeffect para conseguir el id
+  //Useeffect para conseguir el accesToken
   useEffect(() => {
     if (getLocalStorage("logeado") != -1) {
       const token = getLocalStorage("logeado");
@@ -40,7 +40,7 @@ const Home = () => {
 
       fetchUserId();
     }
-  }, []);
+  }, [getLocalStorage("logeado")]);
 
   const handleScroll = () => {
     targetRef.current?.scrollIntoView({

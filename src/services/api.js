@@ -7,6 +7,9 @@ export const urlRegister = `${BASE_URL}/api/auth/register`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
 
 export async function getIdUser(accessToken) {
+  if (accessToken === -1) {
+    return;
+  }
   const urlId = `${BASE_URL}/api/auth/me`;
   const response = await fetch(urlId, {
     headers: {
@@ -21,9 +24,9 @@ export async function getIdUser(accessToken) {
 }
 
 export async function getFavoriteTodos(accessToken) {
-  const idUsuario = await getIdUser(accessToken)
+  const idUsuario = await getIdUser(accessToken);
   const urlfavorite = `${BASE_URL}/api/favoritos`;
-    const response = await fetch(urlfavorite, {
+  const response = await fetch(urlfavorite, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -37,7 +40,7 @@ export async function getFavoriteTodos(accessToken) {
 }
 
 export async function registerUser(email, password) {
-  const fetchUrl = new URL(urlRegister); 
+  const fetchUrl = new URL(urlRegister);
   const response = await fetch(fetchUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -55,7 +58,7 @@ export async function registerUser(email, password) {
   const data = await response.json();
   // { id, email, accessToken }
   console.log(data);
-  
+
   return data;
 }
 
@@ -68,7 +71,7 @@ export async function getFavoriteId(accessToken, idProducto) {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  
+
   if (!response.ok) {
     throw new Error("Error en la petición");
   }
@@ -91,9 +94,8 @@ export async function logout(accessToken) {
   return data.message;
 }
 
-
 export async function setFavorite(accessToken, idProducto) {
-  const idUsuario = await getIdUser(accessToken)
+  const idUsuario = await getIdUser(accessToken);
   const fetchUrl = new URL(urlFavorite);
   const response = await fetch(fetchUrl, {
     method: "POST",
