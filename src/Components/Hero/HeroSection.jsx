@@ -11,6 +11,8 @@ export default function HeroSection({ handleScroll }) {
     const fetchRandomProducts = async () => {
       try {
         const products = await getProducts("", 1, 50);
+
+        
         
         let randomList = [];
         let tempProducts = [...products]; 

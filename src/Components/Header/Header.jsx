@@ -26,6 +26,8 @@ export const Header = () => {
           </NavLink>
         </div>
 
+        
+
         <nav className="flex gap-6 font-medium text-2xl">
           <NavLink className={"navlink navlinkCustom"} to="/">
             {t("header.inicio")}
@@ -42,17 +44,27 @@ export const Header = () => {
           <NavLink to="/login" className="navlink navlinkCustom">
             {logeado === -1 ? (
               <img
-                className="w-[40px] h-auto"
+                className="w-10 h-auto"
                 src="/icons/login.svg"
                 alt="Login"
               />
             ) : (
               <img
-                className="w-[40px] h-auto"
+                className="w-10 h-auto"
                 src="/icons/logout.svg"
                 alt="Logout"
               />
             )}
+          </NavLink>
+
+            <NavLink to="/register" className="navlink navlinkCustom">
+            {logeado === -1 ? (
+              <img
+                className="w-10 h-auto"
+                src="/icons/register.svg"
+                alt="register"
+              />
+            ) : (null)}
           </NavLink>
 
           <LanguageSwitcher />

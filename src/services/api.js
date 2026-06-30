@@ -1,8 +1,83 @@
 const BASE_URL = "http://localhost:3000";
-//const BASE_URL = "https://tp4-react.vercel.app";
+
+// const BASE_URL = "https://tp4-react.vercel.app";
 export const url = `${BASE_URL}/api/productos`;
 export const urlLogin = `${BASE_URL}/api/auth/login`;
+export const urlRegister = `${BASE_URL}/api/auth/register`;
 export const urlFavorite = `${BASE_URL}/api/favoritos`;
+
+export async function getIdUser(accessToken) {
+  if (accessToken === -1) {
+    return;
+  }
+  const urlId = `${BASE_URL}/api/auth/me`;
+  const response = await fetch(urlId, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.id;
+}
+
+export async function getFavoriteTodos(accessToken) {
+  const idUsuario = await getIdUser(accessToken);
+  const urlfavorite = `${BASE_URL}/api/favoritos`;
+  const response = await fetch(urlfavorite, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data ?? null;
+}
+
+export async function registerUser(email, password) {
+  const fetchUrl = new URL(urlRegister);
+  const response = await fetch(fetchUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (response.status === 400) {
+    throw new Error("El email ya está registrado");
+  }
+
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+
+  const data = await response.json();
+  // { id, email, accessToken }
+  console.log(data);
+
+  return data;
+}
+
+//ACAAAA
+export async function getFavoriteId(accessToken, idProducto) {
+  const urlfavorite = `${BASE_URL}/api/favoritos/checker/${idProducto}`;
+  const response = await fetch(urlfavorite, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.id ?? -1;
+}
 
 export async function logout(accessToken) {
   const urlId = `${BASE_URL}/api/auth/logout`;
@@ -18,58 +93,17 @@ export async function logout(accessToken) {
   const data = await response.json();
   return data.message;
 }
-export async function getIdUser(accessToken) {
-  const urlId = `${BASE_URL}/api/auth/me`;
-  const response = await fetch(urlId, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  if (!response.ok) {
-    throw new Error("Error en la petición");
-  }
-  const data = await response.json();
-  return data.id;
-}
-export async function getFavoriteTodos(accessToken) {
-  const urlfavorite = `${BASE_URL}/api/favoritos`;
-  const response = await fetch(urlfavorite, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  if (!response.ok) {
-    throw new Error("Error en la petición");
-  }
-  const data = await response.json();
-  return data ?? null;
-}
-//ACAAAA
-export async function getFavoriteId(accessToken, idProducto) {
-  const urlfavorite = `${BASE_URL}/api/favoritos/checker/${idProducto}`;
-  const response = await fetch(urlfavorite, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  if (!response.ok) {
-    throw new Error("Error en la petición");
-  }
-  const data = await response.json();
-  return data.id ?? -1;
-}
 
 export async function setFavorite(accessToken, idProducto) {
+  const idUsuario = await getIdUser(accessToken);
   const fetchUrl = new URL(urlFavorite);
   const response = await fetch(fetchUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ productId: idProducto }),
+    body: JSON.stringify({ userId: idUsuario, productId: idProducto }),
   });
   if (!response.ok) {
     throw new Error("Error en la petición");
@@ -79,14 +113,17 @@ export async function setFavorite(accessToken, idProducto) {
 }
 
 export async function deleteFavorite(accessToken, idProducto) {
-  const fetchUrl = `${BASE_URL}/api/favoritos/${idProducto}`;
+  const fetchUrl = new URL(`${urlFavorite}/${idProducto}`); 
+  
   const response = await fetch(fetchUrl, {
     method: "DELETE",
     headers: {
+      "Authorization": `Bearer ${accessToken}`, 
       "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
     },
+   
   });
+
   if (!response.ok) {
     throw new Error("Error en la petición");
   }

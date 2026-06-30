@@ -11,11 +11,12 @@ import {
   getLocalStorage,
   setLocalStorage,
 } from "../../services/localStorage.js";
-import { getProducts } from "../../services/api.js";
+import { getIdUser, getProducts } from "../../services/api.js";
 
 const Home = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [idUser, setIdUser] = useState(getLocalStorage("logeado"));
   const targetRef = useRef(null);
   const [favorites, setFavorites] = useState([]);
   if (!getLocalStorage("logeado")) {
@@ -23,6 +24,23 @@ const Home = () => {
   }
 
   useLanguage();
+
+  //Useeffect para conseguir el accesToken
+  useEffect(() => {
+    if (getLocalStorage("logeado") != -1) {
+      const token = getLocalStorage("logeado");
+      const fetchUserId = async () => {
+        try {
+          const id = await getIdUser(token);
+          setIdUser(id);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchUserId();
+    }
+  }, [getLocalStorage("logeado")]);
 
   const handleScroll = () => {
     targetRef.current?.scrollIntoView({
@@ -47,7 +65,11 @@ const Home = () => {
               setSearchQuery={setSearchQuery}
             />
           </div>
-          <ItemLoader searchQuery={searchQuery} setFavorites={setFavorites} />
+          <ItemLoader
+            searchQuery={searchQuery}
+            setFavorites={setFavorites}
+            idUser={idUser}
+          />
         </main>
         <Footer />
       </div>

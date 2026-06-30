@@ -14,35 +14,37 @@ export const ItemCard = ({
   id,
   setFavorites,
   isAlreadyFavorite,
+  idUser,
 }) => {
   const props = { name, avatar, description, price, stock, id };
 
   const [isFavorite, setIsFavorite] = useState(isAlreadyFavorite ? id : -1);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   useEffect(() => {
-    if (!isAlreadyFavorite) {
+    if (!isAlreadyFavorite && idUser !== null) {
       const fetchFavorite = async () => {
-        const userId = getLocalStorage("logeado");
-        if (userId !== -1) {
-          const resultado = await getFavoriteId(userId, id);
+        const token = getLocalStorage("logeado");
+
+        if (token !== -1) {
+          const resultado = await getFavoriteId(token, id);
           setIsFavorite(resultado);
         }
       };
 
       fetchFavorite();
     }
-  }, [id, isAlreadyFavorite]);
-
+  }, [id, isAlreadyFavorite, idUser]);
   const handleFavorite = () => {
-    if (getLocalStorage("logeado") === -1) {
+    if (idUser === -1) {
       navigate("/login");
     } else {
+      const token = getLocalStorage("logeado");
       if (isFavorite < 0) {
-        setFavorite(getLocalStorage("logeado"), id);
+        setFavorite(token, id);
         setIsFavorite(id);
       } else {
-        deleteFavorite(getLocalStorage("logeado"), id);
+        deleteFavorite(token, id);
         setIsFavorite(-1);
         if (typeof setFavorites === "function") {
           setFavorites((prev) => prev.filter((item) => item.id !== id));

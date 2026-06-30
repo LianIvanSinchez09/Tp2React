@@ -47,6 +47,34 @@
     "404" : {
 
         "title" : "Pagina no encontrada"
+    },
+    "login": {
+    "title": "Iniciar sesión",
+    "email": "Email",
+    "password": "Contraseña",
+    "submit": "Entrar",
+    "noAccount": "¿No tenés cuenta?",
+    "register": "Registrate"
+    },
+    "logout": {
+        "title": "Cerrar sesión",
+        "message": "¿Querés cerrar tu cuenta?",
+        "submit": "Cerrar sesión"
+    },
+    "register": {
+        "title": "Registrarse",
+        "email": "Email",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña",
+        "placeholderEmail": "correo@ejemplo.com",
+        "placeholderPassword": "Entre 5 y 15 caracteres",
+        "placeholderConfirm": "Repetí tu contraseña",
+        "submit": "Registrarse →",
+        "hasAccount": "¿Ya tenés cuenta?",
+        "login": "Iniciá sesión",
+        "errorEmail": "Email inválido",
+        "errorPassword": "La contraseña debe tener entre 5 y 15 caracteres",
+        "errorConfirm": "Las contraseñas no coinciden"
     }
 
 }
