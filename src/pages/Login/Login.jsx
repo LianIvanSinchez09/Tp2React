@@ -4,7 +4,7 @@ import { Header } from "../../Components/Header/Header";
 import { Footer } from "../../Components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { getLocalStorage, setLocalStorage } from "../../services/localStorage";
-import { verificarLogin } from "../../services/api";
+import { logout, verificarLogin } from "../../services/api";
 
 const Login = () => {
   const [mensaje, setMensaje] = useState("");
@@ -12,10 +12,20 @@ const Login = () => {
   const { t } = useTranslation();
   const [logeado, setLogeado] = useState(getLocalStorage("logeado") || -1);
 
-  const handleLogout = () => {
-    setLocalStorage("logeado", -1);
-    setLogeado(-1);
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      const resp = await logout(getLocalStorage("logeado"));
+
+      if (resp === "Sesión cerrada correctamente") {
+        setLocalStorage("logeado", -1);
+        setLogeado(-1);
+        navigate("/");
+      } else {
+        console.error("Error al cerrar sesión:", resp);
+      }
+    } catch (error) {
+      console.error("Error en handleLogout:", error);
+    }
   };
 
   const handleSubmit = async (e) => {

@@ -5,7 +5,7 @@ import Spinner from "../Spinner/Spinner.jsx";
 import ErrorComponent from "../Error/ErrorComponent.jsx";
 import { getLocalStorage } from "../../services/localStorage";
 
-const ItemLoader = ({ searchQuery, favorites, setFavorites, idUser }) => {
+const ItemLoader = ({ searchQuery, favorites, setFavorites }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -106,7 +106,6 @@ const ItemLoader = ({ searchQuery, favorites, setFavorites, idUser }) => {
                   {...item}
                   setFavorites={setFavorites}
                   isAlreadyFavorite={!!favorites}
-                  idUser={idUser}
                 />
               </div>
             ))
