@@ -19,6 +19,9 @@ export async function getIdUser(accessToken) {
   const data = await response.json();
   return data.id;
 }
+
+
+
 export async function getFavoriteTodos(idUsuario) {
   const urlfavorite = `${BASE_URL}/api/favoritos/${idUsuario}`;
   const response = await fetch(urlfavorite);
@@ -47,6 +50,8 @@ export async function registerUser(email, password) {
 
   const data = await response.json();
   // { id, email, accessToken }
+  console.log(data);
+  
   return data;
 }
 

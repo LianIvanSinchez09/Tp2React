@@ -46,7 +46,7 @@ export default function RegisterContainer() {
     }
     try {
       const data = await registerUser(form.email, form.password);
-      setLocalStorage("logeado", data.id);
+      setLocalStorage("logeado", data.acessToken);
       navigate("/");
     } catch (error) {
       setApiError(error.message);
