@@ -26,6 +26,8 @@ const Login = () => {
     try {
       const resultado = await verificarLogin(email, password);
       if (resultado !== 1) {
+        console.log(resultado);
+        
         setMensaje(t("login.success", "Correcto"));
         setLocalStorage("logeado", resultado);
         navigate("/");

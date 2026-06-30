@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import { Header } from "../Header/Header";
 
+
 export default function RegisterContainer() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -46,7 +47,9 @@ export default function RegisterContainer() {
     }
     try {
       const data = await registerUser(form.email, form.password);
-      setLocalStorage("logeado", data.acessToken);
+      console.log(data);
+      
+      setLocalStorage("logeado", data.accessToken);
       navigate("/");
     } catch (error) {
       setApiError(error.message);
