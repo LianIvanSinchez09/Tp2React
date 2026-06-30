@@ -39,11 +39,12 @@ export const ItemCard = ({
     if (idUser === -1) {
       navigate("/login");
     } else {
+      const token = getLocalStorage("logeado");
       if (isFavorite < 0) {
-        setFavorite(getLocalStorage("logeado"), id);
+        setFavorite(token, id);
         setIsFavorite(id);
       } else {
-        deleteFavorite(idUser, id);
+        deleteFavorite(token, id);
         setIsFavorite(-1);
         if (typeof setFavorites === "function") {
           setFavorites((prev) => prev.filter((item) => item.id !== id));
