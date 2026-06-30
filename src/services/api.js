@@ -20,9 +20,15 @@ export async function getIdUser(accessToken) {
   return data.id;
 }
 
-export async function getFavoriteTodos(idUsuario) {
-  const urlfavorite = `${BASE_URL}/api/favoritos/${idUsuario}`;
-  const response = await fetch(urlfavorite);
+export async function getFavoriteTodos(accessToken) {
+  const idUsuario = await getIdUser(accessToken)
+  const urlfavorite = `${BASE_URL}/api/favoritos`;
+    const response = await fetch(urlfavorite, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (!response.ok) {
     throw new Error("Error en la petición");
   }
@@ -62,6 +68,7 @@ export async function getFavoriteId(accessToken, idProducto) {
       Authorization: `Bearer ${accessToken}`,
     },
   });
+  
   if (!response.ok) {
     throw new Error("Error en la petición");
   }
@@ -85,11 +92,13 @@ export async function logout(accessToken) {
 }
 
 
-export async function setFavorite(idUsuario, idProducto) {
+export async function setFavorite(accessToken, idProducto) {
+  const idUsuario = await getIdUser(accessToken)
   const fetchUrl = new URL(urlFavorite);
   const response = await fetch(fetchUrl, {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ userId: idUsuario, productId: idProducto }),

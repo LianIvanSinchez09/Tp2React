@@ -24,9 +24,11 @@ export const ItemCard = ({
   useEffect(() => {
     if (!isAlreadyFavorite && idUser !== null) {
       const fetchFavorite = async () => {
-        const userId = idUser;
-        if (userId !== -1) {
-          const resultado = await getFavoriteId(userId, id);
+
+        const token = getLocalStorage("logeado");
+
+        if (token !== -1) {
+          const resultado = await getFavoriteId(token, id);
           setIsFavorite(resultado);
         }
       };
@@ -40,7 +42,7 @@ export const ItemCard = ({
       navigate("/login");
     } else {
       if (isFavorite < 0) {
-        setFavorite(idUser, id);
+        setFavorite(getLocalStorage("logeado"), id);
         setIsFavorite(id);
       } else {
         deleteFavorite(idUser, id);

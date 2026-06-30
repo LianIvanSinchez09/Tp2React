@@ -36,8 +36,8 @@ const Favorites = () => {
   useEffect(() => {
     if (idUser) {
       const fetchFavorites = async () => {
-        const userId = idUser;
-        const favoritos = await getFavoriteTodos(userId);
+        const token = getLocalStorage("logeado")
+        const favoritos = await getFavoriteTodos(token);
         setFavorites(favoritos);
       };
 

@@ -29,8 +29,6 @@ const Home = () => {
   useEffect(() => {
     if (getLocalStorage("logeado") != -1) {
       const token = getLocalStorage("logeado");
-      console.log(token);
-      
       const fetchUserId = async () => {
         try {
           const id = await getIdUser(token);
