@@ -53,6 +53,22 @@ export async function registerUser(email, password) {
   return data;
 }
 
+//ACAAAA
+export async function getFavoriteId(accessToken, idProducto) {
+  const urlfavorite = `${BASE_URL}/api/favoritos/checker/${idProducto}`;
+  const response = await fetch(urlfavorite, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
+  const data = await response.json();
+  return data.id ?? -1;
+}
+
 export async function logout(accessToken) {
   const urlId = `${BASE_URL}/api/auth/logout`;
   const response = await fetch(urlId, {
@@ -68,15 +84,6 @@ export async function logout(accessToken) {
   return data.message;
 }
 
-export async function getFavoriteId(idUsuario, idProducto) {
-  const urlfavorite = `${BASE_URL}/api/favoritos/checker/${idUsuario}/${idProducto}`;
-  const response = await fetch(urlfavorite);
-  if (!response.ok) {
-    throw new Error("Error en la petición");
-  }
-  const data = await response.json();
-  return data.id ?? -1;
-}
 
 export async function setFavorite(idUsuario, idProducto) {
   const fetchUrl = new URL(urlFavorite);
