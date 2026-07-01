@@ -37,13 +37,17 @@ export async function getFavoriteTodos(accessToken) {
 }
 
 export async function registerUser(email, password) {
-  const fetchUrl = new URL(urlRegister); 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const fetchUrl = new URL(urlRegister);
   const response = await fetch(fetchUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
-
+  
+  if (!emailRegex.test(email)) {
+    throw new Error("El formato del email no es válido");
+  }
   if (response.status === 400) {
     throw new Error("El email ya está registrado");
   }
@@ -55,7 +59,7 @@ export async function registerUser(email, password) {
   const data = await response.json();
   // { id, email }
   console.log(data);
-  
+
   return data;
 }
 
